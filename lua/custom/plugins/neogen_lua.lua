@@ -8,7 +8,7 @@ return {
     map("n", "<leader>2", ":lua require('neogen').generate({type = 'class' })<CR>", opts)
     map("n", "<leader>3", ":lua require('neogen').generate({ type = 'file' })<CR>", opts)
 
-    require("neogen").setup {
+    require("neogen").setup({
       enabled = true,
       input_after_comment = true,
       languages = {
@@ -38,9 +38,9 @@ return {
           },
         },
       },
-    }
+    })
   end,
   requires = "nvim-treesitter/nvim-treesitter",
-  lazy = true,
-  event = "InsertEnter"
+  -- lazy = true,
+  event = "VeryLazy",
 }

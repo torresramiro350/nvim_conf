@@ -1,23 +1,67 @@
 return {
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      -- vim.cmd("colorscheme kanagawa")
-    end,
-    priority = 1000
-  },
-  { "catppuccin/nvim",     name = "catppuccin", priority = 1000, lazy = true, },
-  { 'Mofiqul/vscode.nvim', priority = 1000,     lazy = true, },
-  { "Shatur/neovim-ayu",   priority = 1000,     lazy = true, },
-  {
-    "loctvl842/monokai-pro.nvim",
-    priority = 1000,
-    config = function()
-      styles = {
-        comment = { italic = false },
-        keyword = { italic = false },
-      }
-    end
-
-  }
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		event = "VeryLazy",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				term_colors = false,
+				rainbow_delimiters = true,
+				integrations = {
+					notify = "true",
+				},
+			})
+		end,
+	},
+	{
+		"navarasu/onedark.nvim",
+		priority = 1000,
+		config = function()
+			require("onedark").setup({
+				term_colors = true,
+				transparent = false,
+				style = "warm",
+				lualine = {
+					transparent = false,
+				},
+				code_style = {
+					comments = "italic",
+					keywords = "italic",
+					functions = "none",
+					variables = "none",
+				},
+				-- style = "warmer",
+			})
+		end,
+	},
+	{
+		"loctvl842/monokai-pro.nvim",
+		priority = 1000,
+		config = function()
+			require("monokai-pro").setup({
+				styles = {
+					comment = { italic = true },
+					keyword = { italic = true },
+				},
+				-- filter = "pro",
+				filter = "spectrum",
+				-- filter = "ristretto",
+				-- filter = "machine",
+				-- filter = "octagon",
+				background_clear = {
+					"float_win",
+					"telescope",
+					"notify",
+					"bufferline",
+				},
+			})
+		end,
+		lazy = true,
+	},
+	-- {
+	--   "NTBBloodbath/doom-one.nvim",
+	--   priority = 1000,
+	--   lazy = true,
+	-- },
 }

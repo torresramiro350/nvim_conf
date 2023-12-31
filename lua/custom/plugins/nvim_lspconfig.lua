@@ -1,18 +1,18 @@
 return {
   -- LSP Configuration & Plugins
-  'neovim/nvim-lspconfig',
+  "neovim/nvim-lspconfig",
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
     { "antosha417/nvim-lsp-file-operations", config = true },
 
     -- Useful status updates for LSP
     -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-    { 'j-hui/fidget.nvim',                   opts = {} },
+    { "j-hui/fidget.nvim",                   opts = {} },
 
     -- Additional lua configuration, makes nvim stuff amazing!
-    'folke/neodev.nvim',
+    "folke/neodev.nvim",
   },
   config = function()
     --import lspconfig plugin
@@ -31,40 +31,39 @@ return {
       -- for LSP related items. It sets the mode, buffer and description for us each time.
       local nmap = function(keys, func, desc)
         if desc then
-          desc = 'LSP: ' .. desc
+          desc = "LSP: " .. desc
         end
 
-        vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
+        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
       end
 
+      nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+      nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
-      nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-      nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-      nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-      nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-      nmap('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-      nmap('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-      nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-      nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+      nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+      nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+      nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+      nmap("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+      nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+      nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
       -- See `:help K` for why this keymap
-      nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-      nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+      nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+      nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
       -- Lesser used LSP functionality
-      nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-      nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-      nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-      nmap('<leader>wl', function()
+      nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+      nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
+      nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
+      nmap("<leader>wl", function()
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-      end, '[W]orkspace [L]ist Folders')
+      end, "[W]orkspace [L]ist Folders")
 
       -- Create a command `:Format` local to the LSP buffer
-      vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+      vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
         vim.lsp.buf.format()
-      end, { desc = 'Format current buffer with LSP' })
-      nmap('<leader>lf', "<cmd>Format<cr>", '[L]format')
+      end, { desc = "Format current buffer with LSP" })
+      nmap("<leader>lf", "<cmd>Format<cr>", "[L]format")
     end
 
     local ruff_attach = function(client, bufnr)
@@ -86,15 +85,13 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-
-
     -- julia
-    require 'lspconfig'.julials.setup {
+    require("lspconfig").julials.setup({
       capabilities = capabilities,
-      on_attach = on_attach
-    }
+      on_attach = on_attach,
+    })
 
-    lspconfig.rust_analyzer.setup {
+    lspconfig.rust_analyzer.setup({
       -- capabilities = {
       --   offsetEncoding = "utf-16"
       -- },
@@ -107,21 +104,20 @@ return {
       --     }
       --   }
       -- }
-      filetypes = { "rust" }
-    }
+      filetypes = { "rust" },
+    })
 
-    lspconfig.texlab.setup {
+    lspconfig.texlab.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "tex", "plaintex", "bib" }
-    }
+      filetypes = { "tex", "plaintex", "bib" },
+    })
 
-
-    lspconfig.ruff_lsp.setup {
+    lspconfig.ruff_lsp.setup({
       capabilities = capabilities,
       on_attach = ruff_attach,
       filetypes = { "python" },
-    }
+    })
 
     -- configure python server
     lspconfig.pyright.setup({
@@ -132,32 +128,49 @@ return {
       -- }
     })
 
-    lspconfig.bashls.setup {
+    lspconfig.bashls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
-      filetypes = { "sh" }
-    }
+      filetypes = { "sh" },
+    })
 
-    lspconfig.cmake.setup {
+    lspconfig.cmake.setup({
       capabilities = capabilities,
       on_attach = on_attach,
       init_options = {
-        buildDirectory = "build"
+        buildDirectory = "build",
       },
-      filetypes = "cmake"
-    }
-
-    lspconfig.clangd.setup({
-      capabilities = {
-        offsetEncoding = "utf-8",
-      },
-      on_attach = on_attach,
-      filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" }
-      -- filetypes={"*.c", "*.cxx", "*.cpp", "*.h"}
+      filetypes = "cmake",
     })
 
+    lspconfig.yamlls.setup({
+      capabilities = capabilities, -- this line is required for nvim-cmp to work with nvim-lsp
+      on_attach = on_attach,
+    })
 
-    lspconfig["lua_ls"].setup({
+    lspconfig.marksman.setup({
+      capabilities = capabilities,
+      on_attach = on_attach,
+    })
+
+    lspconfig.clangd.setup({
+      require("clangd_extensions.inlay_hints").setup_autocmd(),
+      require("clangd_extensions.inlay_hints").set_inlay_hints(),
+      capabilities = {
+        capabilities,
+        offsetEncoding = "utf-8",
+      },
+      init_options = {
+        usePlaceholders = true,
+        completeunimported = true,
+        clangdFileStatus = true,
+      },
+      -- on_attach = on_attach,
+      on_attach = on_attach,
+      filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+    })
+
+    lspconfig.lua_ls.setup({
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
@@ -165,18 +178,17 @@ return {
           workspace = { checkThirdParty = false },
           telemetry = { enable = false },
         },
-      }
+      },
     })
-
 
     -- autoformat.lua
     --
     -- Use your language server to automatically format your code on save.
     -- Adds additional commands as well to manage the behavior
     local format_is_enabled = true
-    vim.api.nvim_create_user_command('KickstartFormatToggle', function()
+    vim.api.nvim_create_user_command("KickstartFormatToggle", function()
       format_is_enabled = not format_is_enabled
-      print('Setting autoformatting to: ' .. tostring(format_is_enabled))
+      print("Setting autoformatting to: " .. tostring(format_is_enabled))
     end, {})
 
     -- Create an augroup that is used for managing our formatting autocmds.
@@ -185,7 +197,7 @@ return {
     local _augroups = {}
     local get_augroup = function(client)
       if not _augroups[client.id] then
-        local group_name = 'kickstart-lsp-format-' .. client.name
+        local group_name = "kickstart-lsp-format-" .. client.name
         local id = vim.api.nvim_create_augroup(group_name, { clear = true })
         _augroups[client.id] = id
       end
@@ -196,8 +208,8 @@ return {
     -- Whenever an LSP attaches to a buffer, we will run this function.
     --
     -- See `:help LspAttach` for more information about this autocmd event.
-    vim.api.nvim_create_autocmd('LspAttach', {
-      group = vim.api.nvim_create_augroup('kickstart-lsp-attach-format', { clear = true }),
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("kickstart-lsp-attach-format", { clear = true }),
       -- This is where we attach the autoformatting for reasonable clients
       callback = function(args)
         local client_id = args.data.client_id
@@ -211,7 +223,7 @@ return {
 
         -- Create an autocmd that will run *before* we save the buffer.
         --  Run the formatting command for the LSP that has just attached.
-        vim.api.nvim_create_autocmd('BufWritePre', {
+        vim.api.nvim_create_autocmd("BufWritePre", {
           group = get_augroup(client),
           buffer = bufnr,
           callback = function()
@@ -219,18 +231,16 @@ return {
               return
             end
 
-            vim.lsp.buf.format {
+            vim.lsp.buf.format({
               async = false,
               filter = function(c)
                 return c.id == client.id
               end,
-            }
+            })
           end,
         })
       end,
-
     })
   end,
-
   event = { "BufReadPre", "BufNewFile" },
 }

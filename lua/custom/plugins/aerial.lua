@@ -1,6 +1,6 @@
 return {
-  'stevearc/aerial.nvim',
-  event = "VeryLazy",
+  "stevearc/aerial.nvim",
+  event = { "BufReadPre" },
   opts = {
     layout = {
       -- These control the width of the aerial window.
@@ -31,8 +31,8 @@ return {
       -- Preserve window size equality with (:help CTRL-W_=)
       preserve_equality = false,
     },
-    backends = { 'treesitter', 'lsp', 'man', 'markdown' },
-    default_direction = 'default_right',
+    backends = { "treesitter", "lsp", "man", "markdown" },
+    default_direction = "default_right",
     placement = "window",
     resize_to_content = true,
     attach_mode = "window",
@@ -49,11 +49,10 @@ return {
       "Method",
       "Struct",
     },
-
   },
   -- Optional dependencies
   dependencies = {
     "nvim-treesitter/nvim-treesitter",
-    "nvim-tree/nvim-web-devicons"
+    "nvim-tree/nvim-web-devicons",
   },
 }

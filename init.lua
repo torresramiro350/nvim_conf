@@ -3,6 +3,7 @@
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 require("vim_options.essential")
 
+-- TODO: rearrange and clean my main configuration file
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -160,7 +161,7 @@ require("which-key").register({
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require("mason").setup()
-require("mason-lspconfig").setup({ ensure_installed = { "clangd", "pyright" } })
+require("mason-lspconfig").setup({ ensure_installed = { "pyright" } })
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -174,31 +175,10 @@ require("mason-lspconfig").setup({ ensure_installed = { "clangd", "pyright" } })
 -- Setup neovim lua configuration
 require("neodev").setup()
 
---
--- -- Ensure the servers above are installed
--- local mason_lspconfig = require 'mason-lspconfig'
---
--- mason_lspconfig.setup {
---   ensure_installed = vim.tbl_keys(servers),
--- }
---
--- mason_lspconfig.setup_handlers {
---   function(server_name)
---     require('lspconfig')[server_name].setup {
---       capabilities = capabilities,
---       on_attach = on_attach,
---       settings = servers[server_name],
---       filetypes = (servers[server_name] or {}).filetypes,
---     }
---   end,
--- }
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
--- vim.cmd("colorscheme catppuccin-macchiato")
--- vim.cmd("colorscheme vscode")
--- vim.cmd("colorscheme ayu-mirage")
--- vim.cmd("colorscheme kanagawa-wave")
--- vim.cmd("colorscheme kanagawa-dragon")
--- vim.cmd("colorscheme kanagawa-lotus")
 vim.cmd("colorscheme monokai-pro")
+-- vim.cmd("colorscheme catppuccin-mocha")
+-- vim.cmd("colorscheme catppuccin-macchiato")
+-- vim.cmd("colorscheme onedark")
+-- vim.cmd("colorscheme doom-one")

@@ -1,14 +1,13 @@
 return {
   "folke/flash.nvim",
-  lazy = true,
   event = "VeryLazy",
   -- @type Flash.Config
   opts = {
     modes = {
       char = {
-        jump_lables = true
-      }
-    }
+        jump_lables = true,
+      },
+    },
   },
   -- stylua: ignore
   keys = {
