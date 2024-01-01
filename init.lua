@@ -36,9 +36,12 @@ vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 -- Ruff options
 local opts = { noremap = true, silent = true }
 -- vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+-- vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+
+-- close all buffers
+vim.keymap.set("n", "<leader>q", "<cmd>:qa<cr>", { desc = "Close all buffers" })
 
 -- some mappings for making life easier
 vim.keymap.set("i", "jj", "<Esc>", { desc = "escape" })
@@ -69,7 +72,7 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+vim.keymap.set("n", "<leader>o", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -177,8 +180,10 @@ require("neodev").setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-vim.cmd("colorscheme monokai-pro")
+-- vim.cmd("colorscheme monokai-pro")
+-- vim.cmd("colorscheme embark")
 -- vim.cmd("colorscheme catppuccin-mocha")
 -- vim.cmd("colorscheme catppuccin-macchiato")
--- vim.cmd("colorscheme onedark")
+-- vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme onedark")
 -- vim.cmd("colorscheme doom-one")

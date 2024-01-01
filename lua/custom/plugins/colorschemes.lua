@@ -1,8 +1,10 @@
 return {
+	-- { "embark-theme/vim", as = "embark", priority = 1000 },
+	{ "rebelot/kanagawa.nvim" },
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
 		priority = 1000,
 		config = function()
 			require("catppuccin").setup({
