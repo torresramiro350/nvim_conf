@@ -36,7 +36,7 @@ return {
 						end,
 						highlight = "Directory",
 						separator = true,
-						text_align = "left",
+						text_align = "center",
 					},
 				},
 			},

@@ -5,5 +5,6 @@ return {
       cmake_command = "cmake",
     })
   end,
-  event = { "BufEnter CMake*" },
+  ft = { "cmake" },
+  -- event = { "BufEnter CMake*" },
 }

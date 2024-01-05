@@ -1,69 +1,51 @@
 return {
-	-- { "embark-theme/vim", as = "embark", priority = 1000 },
-	{ "rebelot/kanagawa.nvim" },
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		-- event = "VeryLazy",
+		"maxmx03/dracula.nvim",
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				term_colors = false,
-				rainbow_delimiters = true,
-				integrations = {
-					notify = "true",
+			local dracula = require("dracula")
+			dracula.setup({
+				soft = false,
+				-- soft = true,
+				saturation = {
+					enabled = false,
+					amount = 0,
 				},
+				override = {
+					["@keyword"] = { italic = true },
+					["@parameter"] = { italic = true },
+				},
+				-- colors = {
+				-- 	-- bgdark = "#1e1f29",
+				-- 	bg = "#1e1f29",
+				-- },
 			})
 		end,
 	},
 	{
 		"navarasu/onedark.nvim",
-		priority = 1000,
+		lazy = true,
+		-- priority = 1000,
 		config = function()
 			require("onedark").setup({
+				toggle_style_key = "<leader>ts",
 				term_colors = true,
-				transparent = false,
-				style = "warm",
-				lualine = {
-					transparent = false,
-				},
+				-- transparent = {
+				-- 	background = false,
+				-- 	lualine = false,
+				-- },
+				-- style = "darker",
+				-- style = "deep",
+				style = "cool",
+				-- style = "warm",
 				code_style = {
 					comments = "italic",
 					keywords = "italic",
+					strings = "italic",
 					functions = "none",
 					variables = "none",
 				},
-				-- style = "warmer",
 			})
 		end,
 	},
-	{
-		"loctvl842/monokai-pro.nvim",
-		priority = 1000,
-		config = function()
-			require("monokai-pro").setup({
-				styles = {
-					comment = { italic = true },
-					keyword = { italic = true },
-				},
-				-- filter = "pro",
-				filter = "spectrum",
-				-- filter = "ristretto",
-				-- filter = "machine",
-				-- filter = "octagon",
-				background_clear = {
-					"float_win",
-					"telescope",
-					"notify",
-					"bufferline",
-				},
-			})
-		end,
-		lazy = true,
-	},
-	-- {
-	--   "NTBBloodbath/doom-one.nvim",
-	--   priority = 1000,
-	--   lazy = true,
-	-- },
 }
