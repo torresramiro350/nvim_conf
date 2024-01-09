@@ -88,4 +88,6 @@ require("neodev").setup()
 -- vim.cmd("colorscheme monokai-pro")
 -- vim.cmd("colorscheme kanagawa")
 -- vim.cmd("colorscheme onedark")
-vim.cmd("colorscheme dracula")
+vim.g.material_style = "darker"
+vim.cmd("colorscheme material")
+-- vim.cmd("colorscheme dracula")

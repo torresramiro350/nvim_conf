@@ -48,8 +48,11 @@ return {
 					filetypes = { "sh", "bash", "zsh" },
 				}),
 				-- latex
-				null_ls.builtins.diagnostics.textidote.with({
-					filetypes = { "tex", "latex" },
+				null_ls.builtins.formatting.latexindent.with({
+					filetypes = { "tex", "bib" },
+				}),
+				null_ls.builtins.diagnostics.vale.with({
+					filetypes = { "tex", "bib" },
 				}),
 				-- TOML
 				null_ls.builtins.formatting.taplo.with({

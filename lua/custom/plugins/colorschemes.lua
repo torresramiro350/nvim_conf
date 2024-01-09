@@ -1,12 +1,34 @@
 return {
 	{
+		"marko-cerovac/material.nvim",
+		priority = 1000,
+		config = function()
+			require("material").setup({
+				styles = {
+					functions = { italic = true },
+					keywords = { italic = true },
+				},
+				high_visibility = {
+					lighter = true,
+					darker = true,
+				},
+				contrast = {
+					terminal = true,
+					cursor_line = true,
+				},
+				lualine_style = "default",
+				-- lualine_style = "stealth",
+			})
+		end,
+	},
+	{
 		"maxmx03/dracula.nvim",
 		priority = 1000,
 		config = function()
 			local dracula = require("dracula")
 			dracula.setup({
-				soft = false,
-				-- soft = true,
+				-- soft = false,
+				soft = true,
 				saturation = {
 					enabled = false,
 					amount = 0,

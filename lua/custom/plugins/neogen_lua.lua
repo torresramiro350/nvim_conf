@@ -25,6 +25,8 @@ return {
 				},
 				python = {
 					template = {
+						-- annotation_convention = "google_docstrings",
+						-- annotation_convention = "reST",
 						annotation_convention = "numpydoc",
 					},
 				},

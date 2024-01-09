@@ -12,8 +12,8 @@ return {
   config = function()
     require("neo-tree").setup({
       source_selector = {
-        winbar = false,
-        statusline = false,
+        winbar = true,
+        statusline = true,
         show_scrolled_off_parent_node = false,
         pop_up_border_style = "rounded",
         sources = {
