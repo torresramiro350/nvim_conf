@@ -4,6 +4,10 @@ return {
 		priority = 1000,
 		config = function()
 			require("material").setup({
+				disable = {
+					-- colored_cursor = false,
+					-- term_colors = true,
+				},
 				styles = {
 					functions = { italic = true },
 					keywords = { italic = true },
@@ -13,11 +17,26 @@ return {
 					darker = true,
 				},
 				contrast = {
-					terminal = true,
+					borders = false,
+					side_bars = false,
+					terminal = false,
 					cursor_line = true,
+					floating_windows = false,
+					filetypes = {
+						--
+					},
 				},
-				lualine_style = "default",
-				-- lualine_style = "stealth",
+				plugins = {
+					"gitsigns",
+					"nvim-tree",
+					"flash",
+					"telescope",
+				},
+				custom_highlights = {
+					--
+				},
+				-- lualine_style = "default",
+				lualine_style = "stealth",
 			})
 		end,
 	},

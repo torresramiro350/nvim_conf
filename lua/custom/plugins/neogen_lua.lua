@@ -7,10 +7,6 @@ return {
 		vim.keymap.set("n", "<leader>nc", "<cmd>Neogen class<cr>", { desc = "Generate class docs " })
 		vim.keymap.set("n", "<leader>nF", "<cmd>Neogen file<cr>", { desc = "Generate file docs " })
 
-		-- map("n", "<leader>1", ":lua require('neogen').generate({type = 'func' })<CR>", opts)
-		-- map("n", "<leader>2", ":lua require('neogen').generate({type = 'class' })<CR>", opts)
-		-- map("n", "<leader>3", ":lua require('neogen').generate({ type = 'file' })<CR>", opts)
-
 		require("neogen").setup({
 			-- snippet_engine = "luasnip",
 			-- snippet_engine = "vsnip",
@@ -25,7 +21,6 @@ return {
 				},
 				python = {
 					template = {
-						-- annotation_convention = "google_docstrings",
 						-- annotation_convention = "reST",
 						annotation_convention = "numpydoc",
 					},
