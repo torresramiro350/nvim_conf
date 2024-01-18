@@ -118,18 +118,34 @@ return {
 			filetypes = { "python" },
 		})
 
+		-- lspconfig.pylyzer.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	filetypes = { "python" },
+		-- 	settings = {
+		-- 		python = {
+		-- 			checkOnType = false,
+		-- 			diagnostics = true,
+		-- 			inlayHints = true,
+		-- 			smartCompletion = true,
+		-- 		},
+		-- 	},
+		-- })
+
 		-- configure python server
 		lspconfig.pyright.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			analysis = {
-				autoSearchPaths = true,
-				diagnosticMode = "openFilesOnly",
-				useLibraryCodeForTypes = true,
+			settings = {
+				python = {
+					analysis = {
+						autoSearchPaths = true,
+						diagnosticMode = "openFilesOnly",
+						useLibraryCodeForTypes = true,
+					},
+				},
 			},
-			-- settings = {
-			--   single_filesupport=false,
-			-- }
+			single_filesupport = false,
 		})
 
 		lspconfig.bashls.setup({

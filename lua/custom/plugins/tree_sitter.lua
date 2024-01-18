@@ -30,7 +30,10 @@ return {
 						["af"] = "@function.outer",
 						["if"] = "@function.inner",
 						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
+						["iC"] = "@class.inner",
+						["ic"] = "@comment.inner",
+						["oc"] = "@comment.outer",
+						["aF"] = "@custom.capture",
 					},
 				},
 				move = {

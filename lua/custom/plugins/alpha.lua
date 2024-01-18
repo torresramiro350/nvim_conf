@@ -1,64 +1,44 @@
 return {
-  "goolord/alpha-nvim",
-  lazy = true,
-  event = "VimEnter",
-  config = function()
-    --   -- require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
-    -- require("alpha").setup(require("alpha.themes.startify").config)
-    local status_ok, alpha = pcall(require, "alpha")
-    if not status_ok then
-      return
-    end
-    -- local dashboard = require("alpha").setup({ "alpha.themes.startify" })
+	"goolord/alpha-nvim",
+	lazy = true,
+	event = "VimEnter",
+	config = function()
+		--   -- require 'alpha'.setup(require 'alpha.themes.dashboard'.config)
+		-- require("alpha").setup(require("alpha.themes.startify").config)
+		local status_ok, alpha = pcall(require, "alpha")
+		if not status_ok then
+			return
+		end
+		-- local dashboard = require("alpha").setup({ "alpha.themes.startify" })
 
-    -- local dashboard = require("alpha.themes.dashboard")
-    local dashboard = require("alpha.themes.startify")
-    dashboard.section.header.val = {
-      "           ▄ ▄                   ",
-      "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-      "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-      "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-      "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-      "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-      "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-      "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-      "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
-    }
-    -- dashboard.position = "center"
-    --
-    dashboard.section.top_buttons.val = {
-      dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
-      dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-      dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
-      dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
-      dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua<CR>"),
-      -- dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
-    }
-    --
-    -- local function footer()
-    --   return "Don't Stop Until You are Proud..."
-    -- end
-    --
-    -- dashboard.section.footer.val = footer()
-    --
-    -- dashboard.section.footer.opts.hl = "Type"
-    -- dashboard.section.header.opts.hl = "Include"
-    -- dashboard.section.buttons.opts.hl = "Keyword"
-    --
-    -- dashboard.opts.opts.noautocmd = true
-    -- require("alpha").setup(dashboard.opts)
+		-- local dashboard = require("alpha.themes.dashboard")
+		local dashboard = require("alpha.themes.startify")
 
-    -- vim.api.nvim_create_autocmd("User", {
-    --   pattern = "LazyVimStarted",
-    --   callback = function()
-    --     local stats = require("lazy").stats()
-    --     local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-    --     -- stylua: ignore
-    --     dashboard.section.footer.val = '⚡ ' .. stats.count .. ' plugins loaded in ' .. ms .. 'ms'
-    --     pcall(vim.cmd.AlphaRedraw)
-    --   end,
-    -- })
+		dashboard.nvim_web_devicons.highlight = true
 
-    alpha.setup(dashboard.opts)
-  end,
+		dashboard.section.header.val = {
+			"           ▄ ▄                   ",
+			"       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
+			"       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
+			"    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
+			"  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
+			"  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
+			"▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
+			"█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
+			"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+		}
+		dashboard.section.top_buttons.val = {
+			dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
+			dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+			dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
+			dashboard.button("t", "  Find text", ":Telescope live_grep <CR>"),
+			dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua<CR>"),
+			-- dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+		}
+		dashboard.section.bottom_buttons.val = {
+			dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+		}
+
+		alpha.setup(dashboard.opts)
+	end,
 }

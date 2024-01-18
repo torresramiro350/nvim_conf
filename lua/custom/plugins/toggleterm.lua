@@ -3,10 +3,11 @@ return {
 	config = function()
 		local fterm = require("FTerm")
 		fterm.setup({
-			border = "single",
+			cmd = "/usr/bin/fish",
+			border = "rounded",
 			dimensions = {
-				width = 0.8,
-				height = 0.8,
+				width = 0.6,
+				height = 0.6,
 			},
 		})
 		vim.keymap.set("n", "<A-i>", "<cmd>lua require('FTerm').toggle()<cr>", { desc = "Toggle terminal" })

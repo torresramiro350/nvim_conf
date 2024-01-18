@@ -9,8 +9,9 @@ return {
 					-- term_colors = true,
 				},
 				styles = {
-					functions = { italic = true },
+					functions = { italic = true, bold = false },
 					keywords = { italic = true },
+					types = { bold = true },
 				},
 				high_visibility = {
 					lighter = true,
