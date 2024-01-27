@@ -6,8 +6,8 @@ return {
 			cmd = "/usr/bin/fish",
 			border = "rounded",
 			dimensions = {
-				width = 0.6,
-				height = 0.6,
+				width = 0.8,
+				height = 0.8,
 			},
 		})
 		vim.keymap.set("n", "<A-i>", "<cmd>lua require('FTerm').toggle()<cr>", { desc = "Toggle terminal" })

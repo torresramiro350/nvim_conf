@@ -39,7 +39,6 @@ return {
 
 			nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 			nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
 			nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
 			nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 			nmap("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
@@ -85,32 +84,40 @@ return {
 		end
 
 		-- julia
-		require("lspconfig").julials.setup({
+		lspconfig.julials.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
 
+		-- rust
 		lspconfig.rust_analyzer.setup({
-			-- capabilities = {
-			--   offsetEncoding = "utf-16"
-			-- },
 			capabilities = capabilities,
 			on_attach = on_attach,
-			-- settings = {
-			--   ['rust-analyzer'] = {
-			--     diagnostics = {
-			--       enabled = false
-			--     }
-			--   }
-			-- }
 			filetypes = { "rust" },
 		})
 
+		--latex
 		lspconfig.texlab.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "tex", "plaintex", "bib" },
 		})
+
+		-- configure python server
+		-- NOTE: only available for free with open source projects (hope to use
+		-- it in the future)
+		-- lspconfig.sourcery.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = ruff_attach,
+		-- 	init_options = {
+		-- 		token = "user_dIGOG_nGdW97HxBFt5JzlXervkgAPuQqWm8_wJBBSpHEbiXhDywUnopZTvs",
+		-- 		-- extension_version = "vim.lsp",
+		-- 		-- editor_version = "vim",
+		-- 	},
+		-- 	filetypes = { "python" },
+		-- 	cmd = { "sourcery", "lsp" },
+		-- 	single_file_support = true,
+		-- })
 
 		lspconfig.ruff_lsp.setup({
 			capabilities = capabilities,
@@ -118,21 +125,6 @@ return {
 			filetypes = { "python" },
 		})
 
-		-- lspconfig.pylyzer.setup({
-		-- 	capabilities = capabilities,
-		-- 	on_attach = on_attach,
-		-- 	filetypes = { "python" },
-		-- 	settings = {
-		-- 		python = {
-		-- 			checkOnType = false,
-		-- 			diagnostics = true,
-		-- 			inlayHints = true,
-		-- 			smartCompletion = true,
-		-- 		},
-		-- 	},
-		-- })
-
-		-- configure python server
 		lspconfig.pyright.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -145,15 +137,17 @@ return {
 					},
 				},
 			},
-			single_filesupport = false,
+			single_file_support = true,
 		})
 
+		--bash
 		lspconfig.bashls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "sh" },
 		})
 
+		-- cmake
 		lspconfig.cmake.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -163,16 +157,19 @@ return {
 			filetypes = "cmake",
 		})
 
+		-- YAML
 		lspconfig.yamlls.setup({
 			capabilities = capabilities, -- this line is required for nvim-cmp to work with nvim-lsp
 			on_attach = on_attach,
 		})
 
+		-- markdown
 		lspconfig.marksman.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
 
+		-- C/C++
 		lspconfig.clangd.setup({
 			capabilities = {
 				capabilities,
@@ -183,11 +180,11 @@ return {
 				completeunimported = true,
 				clangdFileStatus = true,
 			},
-			-- on_attach = on_attach,
 			on_attach = on_attach,
 			filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 		})
 
+		-- Lua
 		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -197,7 +194,12 @@ return {
 					telemetry = { enable = false },
 				},
 			},
+			filetypes = { "lua" },
+			cmd = { "lua-language-server" },
+			single_file_support = true,
 		})
+
+		-- add more server configurations below
 
 		-- autoformat.lua
 		--

@@ -91,16 +91,17 @@ return {
 					select = true,
 				}),
 				["<Tab>"] = cmp.mapping(function(fallback)
-					if copilot.is_visible() then
-						copilot.accept()
-					elseif cmp.visible() then
+					if cmp.visible() then
+						-- elseif cmp.visible() then
 						-- necessary for usage with Copilot
 						-- so that it doesn't interfere with cmp or lsp completion suggestions
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-					-- cmp.select_next_item()
+						-- cmp.select_next_item()
+					elseif copilot.is_visible() then
+						copilot.accept()
 					elseif luasnip.expand_or_locally_jumpable() then
 						luasnip.expand_or_jump()
-					-- little addition to introduce copilot's code completions
+						-- little addition to introduce copilot's code completions
 					elseif has_words_before() then
 						cmp.complete()
 					else
