@@ -1,6 +1,11 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
 	-- Highlight, edit, and navigate code
+	-- [[ Configure Treesitter ]]
+	-- See `:help nvim-treesitter`
+	-- Defer Treesitter setup after first render to improve startup time of 'nvim {filename}'
+	-- vim.defer_fn(function()
+	-- end, 0)
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			-- Add languages to be installed here that you want installed for treesitter

@@ -1,7 +1,5 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	-- lazy = true,
-	-- event = "UIEnter",
 	event = "BufEnter",
 	config = function()
 		-- Eviline config for lualine
@@ -25,10 +23,6 @@ return {
 			red      = '#ec5f67',
 		}
 
-		-- local colors = require("vscode.colors").get_colors()
-		-- local colors = require("kanagawa.colors").setup()
-		-- local colors = require("catppuccin.palettes").get_palette("macchiato")
-
 		local conditions = {
 			buffer_not_empty = function()
 				return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
@@ -49,11 +43,7 @@ return {
 				-- Disable sections and component separators
 				component_separators = "",
 				section_separators = "",
-				-- theme = "monokai-pro",
-				-- theme = "onedark",
 				theme = "material-stealth",
-				-- theme = "catppuccin",
-				-- theme = "dracula",
 				-- theme = {
 				--   -- We are going to use lualine_c an lualine_x as left and
 				--   -- right section. Both are highlighted by c theme .  So we
@@ -97,7 +87,7 @@ return {
 			function()
 				return "▊"
 			end,
-			color = { fg = colors.blue }, -- Sets highlighting of component
+			color = { fg = colors.blue },   -- Sets highlighting of component
 			padding = { left = 0, right = 1 }, -- We don't need space before this
 		})
 
@@ -188,12 +178,12 @@ return {
 				return msg
 			end,
 			icon = " LSP:",
-			color = { fg = "#ffffff", gui = "bold" },
+			color = { fg = "#ffcb6b", gui = "bold" },
 		})
 
 		-- Add components to right sections
 		ins_right({
-			"o:encoding", -- option component same as &encoding in viml
+			"o:encoding",    -- option component same as &encoding in viml
 			fmt = string.upper, -- I'm not sure why it's upper case either ;)
 			cond = conditions.hide_in_width,
 			color = { fg = colors.green, gui = "bold" },

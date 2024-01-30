@@ -48,6 +48,28 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load()
 		luasnip.config.setup({})
 
+		-- sets up auto completion for the command line
+		cmp.setup.cmdline({ "/", "?" }, {
+			-- mapping = cmp.mapping.preset.cmdline(),
+			sources = {
+				{ name = "buffer" },
+			},
+		})
+
+		cmp.setup.cmdline(":", {
+			-- mapping = cmp.mapping.preset.cmdline(),
+			sources = cmp.config.sources({
+				{ name = "path" },
+			}, {
+				{
+					name = "cmdline",
+					option = {
+						ignore_cmds = { "Man", "!" },
+					},
+				},
+			}),
+		})
+
 		cmp.setup({
 			-- setup the window style for code completion (I like the window rounded style)
 			-- with borders for both code completion and documentation
@@ -63,7 +85,9 @@ return {
 			},
 			-- will update this with more information once I know what this is doing
 			sorting = {
+				priority_weight = 2,
 				comparators = {
+					require("copilot_cmp.comparators").prioritize,
 					cmp.config.compare.offset,
 					cmp.config.compare.exact,
 					cmp.config.compare.recently_used,

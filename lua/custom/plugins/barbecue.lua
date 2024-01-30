@@ -10,9 +10,27 @@ return {
 		local barbecue = require("barbecue")
 		barbecue.setup({
 			-- add options here
+			attach_navic = false,
+			create_autocmd = false,
+		})
+
+		vim.api.nvim_create_autocmd({
+			"WinScrolled", -- or WinResized on NVIM-v0.9 and higher
+			"BufWinEnter",
+			"CursorHold",
+			"InsertLeave",
+
+			-- include this if you have set `show_modified` to `true`
+			"BufModifiedSet",
+		}, {
+			group = vim.api.nvim_create_augroup("barbecue.updater", {}),
+			callback = function()
+				require("barbecue.ui").update()
+			end,
 		})
 	end,
 	-- lazy loading to prevent slowdown
 	-- load when buffer has been loaded for reading
-	event = { "BufEnter", "BufRead", "BufReadPost" },
+	-- event = { "BufEnter", "BufRead", "BufReadPost" },
+	event = { "BufWinEnter" },
 }

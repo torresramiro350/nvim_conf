@@ -9,7 +9,7 @@ return {
 
 		-- Useful status updates for LSP
 		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-		{ "j-hui/fidget.nvim",                   opts = {} },
+		{ "j-hui/fidget.nvim", opts = {} },
 
 		-- Additional lua configuration, makes nvim stuff amazing!
 		"folke/neodev.nvim",
@@ -22,7 +22,13 @@ return {
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		-- [[ Configure LSP ]]
 		--  This function gets run when an LSP connects to a particular buffer.
-		local on_attach = function(_, bufnr)
+		local on_attach = function(client, bufnr)
+			-- declared here to avoid the automatic enabling of nvim-navic which raises
+			-- a warning for rust
+			if client.server_capabilities["documentSymbolProvider"] then
+				require("nvim-navic").attach(client, bufnr)
+			end
+
 			-- NOTE: Remember that lua is a real programming language, and as such it is possible
 			-- to define small helper and utility functions so you don't have to repeat yourself
 			-- many times.
@@ -91,6 +97,13 @@ return {
 
 		-- rust
 		lspconfig.rust_analyzer.setup({
+			settings = {
+				["rust-analyzer"] = {
+					diagnostics = {
+						enable = true,
+					},
+				},
+			},
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "rust" },
@@ -206,7 +219,7 @@ return {
 		-- Use your language server to automatically format your code on save.
 		-- Adds additional commands as well to manage the behavior
 		local format_is_enabled = true
-		vim.api.nvim_create_user_command("KickstartFormatToggle", function()
+		vim.api.nvim_create_user_command("FormatToggle", function()
 			format_is_enabled = not format_is_enabled
 			print("Setting autoformatting to: " .. tostring(format_is_enabled))
 		end, {})

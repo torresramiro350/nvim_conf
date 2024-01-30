@@ -28,12 +28,6 @@ return {
 		vim.keymap.set("n", "<leader>ic", "<cmd>Octo issue close<cr>", { desc = "Close issue" })
 		vim.keymap.set("n", "<leader>ib", "<cmd>Octo issue browser<cr>", { desc = "Open issue in browser" })
 	end,
-	cond = function()
-		-- enable plugins only within a git repo
-		local current_dir = vim.fn.getcwd()
-		local git_dir = current_dir .. "/.git"
-		return vim.fn.isdirectory(git_dir) == 1
-	end,
 	event = "VeryLazy",
 	cond = function()
 		-- enable plugins only within a git repo

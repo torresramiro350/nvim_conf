@@ -39,7 +39,9 @@ return {
 					filetypes = { "cmake" },
 				}),
 				-- rust
-				null_ls.builtins.formatting.rustfmt,
+				null_ls.builtins.formatting.rustfmt.with({
+					filetypes = { "rust" },
+				}),
 				--bash
 				null_ls.builtins.code_actions.shellcheck.with({
 					filetypes = { "sh", "bash", "zsh" },

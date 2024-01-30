@@ -1,20 +1,38 @@
 return {
 	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		-- priority = 1000,
+		lazy = true,
+		config = function()
+			local cat = require("catppuccin")
+			-- local mocha = require("catppuccin.palettes").get_palette("mocha")
+			cat.setup({
+				highlight_overrides = {
+					mocha = function(mocha)
+						return { LineNr = { fg = mocha.lavender } }
+					end,
+				},
+			})
+		end,
+	},
+	{
 		"marko-cerovac/material.nvim",
 		priority = 1000,
 		config = function()
 			require("material").setup({
 				disable = {
+					borders = false,
 					-- colored_cursor = false,
 					-- term_colors = true,
 				},
 				styles = {
 					functions = { italic = true, bold = false },
-					keywords = { italic = true },
-					types = { bold = true },
+					keywords = { italic = true, bold = true },
+					types = { italic = true, bold = true },
 				},
 				high_visibility = {
-					lighter = true,
+					lighter = false,
 					darker = true,
 				},
 				contrast = {

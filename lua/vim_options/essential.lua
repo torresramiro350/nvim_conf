@@ -1,3 +1,4 @@
+-- [[ Setting options ]]
 -- Place all the general Neovim options
 vim.g.gitblame_display_virtual_text = 1
 vim.g.mapleader = " "
@@ -8,7 +9,6 @@ vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
 
--- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
