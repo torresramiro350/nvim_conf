@@ -24,8 +24,8 @@ return {
 	{
 		"zbirenbaum/copilot-cmp",
 		event = "InsertEnter",
-		-- fix_pairs = true,
 		config = function()
+			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 			require("copilot_cmp").setup({
 				fix_pairs = true,
 			})

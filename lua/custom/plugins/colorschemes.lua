@@ -1,5 +1,30 @@
 return {
 	{
+		"folke/tokyonight.nvim",
+		config = function()
+			local tokyo = require("tokyonight")
+			tokyo.setup({
+				styles = {
+					comments = { italic = true },
+					keywords = { italic = true },
+					functions = { italic = true },
+					variables = {},
+				},
+				on_highlights = function(hl, c)
+					hl.LineNr = { fg = "#565f89" }
+					-- hl.LineNr = { fg = "#9aa5ce" }
+					-- hl.LineNr = { fg = "#cfc9c2" }
+					-- hl.LineNr = { fg = "#C0CAF5" }
+					-- hl.LineNr = { fg = c.green }
+					-- hl.CursorLineNr = {
+					-- 	fg = c.yellow,
+					-- }
+				end,
+			})
+		end,
+		priority = 1000,
+	},
+	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		-- priority = 1000,
