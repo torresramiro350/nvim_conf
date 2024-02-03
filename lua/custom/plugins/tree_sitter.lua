@@ -1,5 +1,7 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
+	event = { "BufRead", "BufReadPost" },
+	-- event = "VeryLazy",
 	-- Highlight, edit, and navigate code
 	-- [[ Configure Treesitter ]]
 	-- See `:help nvim-treesitter`

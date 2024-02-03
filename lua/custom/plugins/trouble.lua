@@ -1,6 +1,7 @@
 return {
-  lazy = true,
-  event = "VeryLazy",
+  -- lazy = true,
+  -- event = "VeryLazy",
+  event = { "BufRead", "BufReadPost" },
   "folke/trouble.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {

@@ -1,7 +1,8 @@
 return {
 	-- Autocompletion
 	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
+	-- event = "InsertEnter",
+	event = { "BufReadPost", "InsertEnter" },
 	dependencies = {
 		-- Snippet Engine & its associated nvim-cmp source
 		"L3MON4D3/LuaSnip",
@@ -91,7 +92,7 @@ return {
 					require("copilot_cmp.comparators").prioritize,
 					cmp.config.compare.offset,
 					cmp.config.compare.recently_used,
-					require("clangd_extensions.cmp_scores"),
+					-- require("clangd_extensions.cmp_scores"),
 					cmp.config.compare.kind,
 					cmp.config.compare.sort_text,
 					cmp.config.compare.length,
@@ -144,11 +145,11 @@ return {
 			}),
 			-- source completion list
 			sources = cmp.config.sources({
-				{ name = "nvim_lsp" },
-				{ name = "copilot" },
-				{ name = "buffer" },
-				{ name = "luasnip" },
-				{ name = "path" },
+				{ name = "nvim_lsp", group_index = 2 },
+				{ name = "copilot",  group_index = 2 },
+				{ name = "buffer",   group_index = 2 },
+				{ name = "luasnip",  group_index = 2 },
+				{ name = "path",     group_index = 2 },
 			}),
 			-- configure lspkind for vs-code like pictograms in completion menu
 			formatting = {

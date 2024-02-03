@@ -2,7 +2,8 @@
 return {
 	{
 		"f-person/git-blame.nvim",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		event = { "BufRead", "BufReadPost" },
 		cond = function()
 			-- enable plugins only within a git repo
 			local current_dir = vim.fn.getcwd()
@@ -16,13 +17,14 @@ return {
 			})
 		end,
 	},
-	{ "tpope/vim-rhubarb",  event = "VeryLazy" },
+	{ "tpope/vim-rhubarb",  event = { "BufRead", "BufReadPost" } },
 	-- allows the integration of git functionality within neovim
-	{ "tpope/vim-fugitive", event = "VeryLazy" },
+	{ "tpope/vim-fugitive", event = { "BufRead", "BufReadPost" } },
 	{
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
-		event = "VeryLazy",
+		event = { "BufRead", "BufReadPost" },
+		-- event = "VeryLazy",
 		cond = function()
 			-- enable plugins only within a git repo
 			local current_dir = vim.fn.getcwd()

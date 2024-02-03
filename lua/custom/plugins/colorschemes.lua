@@ -1,60 +1,20 @@
 return {
 	{
-		"folke/tokyonight.nvim",
-		config = function()
-			local tokyo = require("tokyonight")
-			tokyo.setup({
-				styles = {
-					comments = { italic = true },
-					keywords = { italic = true },
-					functions = { italic = true },
-					variables = {},
-				},
-				on_highlights = function(hl, c)
-					hl.LineNr = { fg = "#565f89" }
-					-- hl.LineNr = { fg = "#9aa5ce" }
-					-- hl.LineNr = { fg = "#cfc9c2" }
-					-- hl.LineNr = { fg = "#C0CAF5" }
-					-- hl.LineNr = { fg = c.green }
-					-- hl.CursorLineNr = {
-					-- 	fg = c.yellow,
-					-- }
-				end,
-			})
-		end,
-		priority = 1000,
-	},
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		-- priority = 1000,
-		lazy = true,
-		config = function()
-			local cat = require("catppuccin")
-			-- local mocha = require("catppuccin.palettes").get_palette("mocha")
-			cat.setup({
-				highlight_overrides = {
-					mocha = function(mocha)
-						return { LineNr = { fg = mocha.lavender } }
-					end,
-				},
-			})
-		end,
-	},
-	{
 		"marko-cerovac/material.nvim",
 		priority = 1000,
 		config = function()
 			require("material").setup({
 				disable = {
 					borders = false,
-					-- colored_cursor = false,
-					-- term_colors = true,
+					colored_cursor = false,
+					term_colors = false,
 				},
 				styles = {
 					functions = { italic = true, bold = false },
 					keywords = { italic = true, bold = true },
 					types = { italic = true, bold = true },
+					-- variables = { bold = true },
+					operators = { bold = true },
 				},
 				high_visibility = {
 					lighter = false,
@@ -66,6 +26,7 @@ return {
 					terminal = false,
 					cursor_line = true,
 					floating_windows = false,
+					non_current_window = true,
 					filetypes = {
 						--
 					},
@@ -73,37 +34,21 @@ return {
 				plugins = {
 					"gitsigns",
 					"nvim-tree",
+					"nvim-navic",
+					"nvim-web-devicons",
+					"noice",
+					"rainbow-delimiters",
 					"flash",
 					"telescope",
+					"nvim-notify",
+					"which-key",
+					"trouble",
 				},
 				custom_highlights = {
 					--
 				},
 				-- lualine_style = "default",
 				lualine_style = "stealth",
-			})
-		end,
-	},
-	{
-		"maxmx03/dracula.nvim",
-		priority = 1000,
-		config = function()
-			local dracula = require("dracula")
-			dracula.setup({
-				-- soft = false,
-				soft = true,
-				saturation = {
-					enabled = false,
-					amount = 0,
-				},
-				override = {
-					["@keyword"] = { italic = true },
-					["@parameter"] = { italic = true },
-				},
-				-- colors = {
-				-- 	-- bgdark = "#1e1f29",
-				-- 	bg = "#1e1f29",
-				-- },
 			})
 		end,
 	},

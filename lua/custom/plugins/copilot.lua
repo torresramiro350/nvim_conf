@@ -2,7 +2,8 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		event = "InsertEnter",
+		-- event = "InsertEnter",
+		event = { "InsertEnter", "LspAttach" },
 		-- priority = 1000,
 		config = function()
 			require("copilot").setup({
@@ -23,7 +24,7 @@ return {
 	},
 	{
 		"zbirenbaum/copilot-cmp",
-		event = "InsertEnter",
+		event = { "InsertEnter", "LspAttach" },
 		config = function()
 			vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 			require("copilot_cmp").setup({
@@ -33,6 +34,7 @@ return {
 	},
 	{
 		"AndreM222/copilot-lualine",
-		event = "InsertEnter",
+		event = { "InsertEnter", "LspAttach" },
+		-- event = "InsertEnter",
 	},
 }

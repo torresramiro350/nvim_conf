@@ -7,5 +7,6 @@ return {
 			multiline_threshold = 3,
 		})
 	end,
-	event = "VeryLazy",
+	-- event = "VeryLazy",
+	event = { "BufRead", "BufReadPost" },
 }

@@ -1,5 +1,6 @@
 return {
 	"pwntester/octo.nvim",
+	event = { "BufRead", "BufReadPost" },
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",
@@ -27,8 +28,9 @@ return {
 		vim.keymap.set("n", "<leader>io", "<cmd>Octo issue create<cr>", { desc = "Create issue" })
 		vim.keymap.set("n", "<leader>ic", "<cmd>Octo issue close<cr>", { desc = "Close issue" })
 		vim.keymap.set("n", "<leader>ib", "<cmd>Octo issue browser<cr>", { desc = "Open issue in browser" })
+		vim.keymap.set("n", "<leader>ca", "<cmd>Octo comment add<cr>", { desc = "Add comment" })
 	end,
-	event = "VeryLazy",
+	-- event = "VeryLazy",
 	cond = function()
 		-- enable plugins only within a git repo
 		local current_dir = vim.fn.getcwd()

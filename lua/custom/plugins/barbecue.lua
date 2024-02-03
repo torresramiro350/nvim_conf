@@ -31,6 +31,6 @@ return {
 	end,
 	-- lazy loading to prevent slowdown
 	-- load when buffer has been loaded for reading
-	-- event = { "BufEnter", "BufRead", "BufReadPost" },
-	event = { "BufWinEnter" },
+	event = { "BufRead", "BufReadPost" },
+	-- event = { "BufWinEnter" },
 }
