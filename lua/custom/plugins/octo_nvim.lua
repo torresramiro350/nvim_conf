@@ -1,4 +1,5 @@
 return {
+	priority = 1000,
 	"pwntester/octo.nvim",
 	event = { "BufRead", "BufReadPost" },
 	dependencies = {

@@ -1,6 +1,7 @@
 -- Git integration plugins placed here
 return {
 	{
+		priority = 1000,
 		"f-person/git-blame.nvim",
 		-- event = "VeryLazy",
 		event = { "BufRead", "BufReadPost" },
@@ -17,10 +18,11 @@ return {
 			})
 		end,
 	},
-	{ "tpope/vim-rhubarb",  event = { "BufRead", "BufReadPost" } },
+	{ "tpope/vim-rhubarb",  event = { "BufRead", "BufReadPost" }, priority = 1000 },
 	-- allows the integration of git functionality within neovim
-	{ "tpope/vim-fugitive", event = { "BufRead", "BufReadPost" } },
+	{ "tpope/vim-fugitive", event = { "BufRead", "BufReadPost" }, priority = 1000 },
 	{
+		priority = 1000,
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
 		event = { "BufRead", "BufReadPost" },
