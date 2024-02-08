@@ -5,9 +5,35 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.o.background = "dark"
 
+-- Set fold settings
+-- These options were reccommended by nvim-ufo
+-- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+vim.opt.foldcolumn = "0"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
+
+-- Place a column line
+-- vim.opt.colorcolumn = "99"
+
+-- Enable cursor line highlight
+vim.opt.cursorline = true
+
+-- set tabs to 2 spaces
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
+
+-- set smart indent and set to 2 spaces
+vim.opt.smartindent = true
+vim.opt.shiftwidth = 2
+
+-- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
+vim.opt.breakindent = true
+
+-- Better splitting
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!

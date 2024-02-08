@@ -48,8 +48,9 @@ require("neodev").setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-vim.g.material_style = "darker"
-vim.cmd("colorscheme material")
+-- vim.g.material_style = "darker"
+-- vim.cmd("colorscheme material")
+vim.cmd("colorscheme catppuccin-mocha")
 -- vim.cmd("colorscheme nordic")
 -- vim.cmd("colorscheme tokyonight-moon")
 -- vim.cmd("colorscheme tokyonight")
