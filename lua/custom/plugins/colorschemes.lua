@@ -10,13 +10,28 @@ return {
 			-- local mocha = require("catppuccin.palettes").get_palette("mocha")
 
 			cat.setup({
+				styles = {            -- Handles the styles of general hi groups (see `:h highlight-args`):
+					comments = { "italic" }, -- Change the style of comments
+					conditionals = { "italic" },
+					loops = { "italic" },
+					functions = {},
+					keywords = { "italic" },
+					types = { "italic" },
+					-- strings = {},
+					-- variables = {},
+					-- numbers = {},
+					-- booleans = {},
+					-- properties = {},
+					-- operators = {},
+				},
 				integrations = {
 					--defaults
 					notify = true,
 				},
 				highlight_overrides = {
 					mocha = function(mocha)
-						return { LineNr = { fg = mocha.lavender } }
+						-- return { LineNr = { fg = mocha.lavender } }
+						return { LineNr = { fg = mocha.overlay0 } }
 					end,
 				},
 			})
