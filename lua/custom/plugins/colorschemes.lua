@@ -10,7 +10,7 @@ return {
 			-- local mocha = require("catppuccin.palettes").get_palette("mocha")
 
 			cat.setup({
-				styles = {            -- Handles the styles of general hi groups (see `:h highlight-args`):
+				styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
 					comments = { "italic" }, -- Change the style of comments
 					conditionals = { "italic" },
 					loops = { "italic" },
@@ -27,6 +27,7 @@ return {
 				integrations = {
 					--defaults
 					notify = true,
+					telescope = true,
 				},
 				highlight_overrides = {
 					mocha = function(mocha)
@@ -40,6 +41,7 @@ return {
 	{
 		"marko-cerovac/material.nvim",
 		priority = 1000,
+		lazy = true,
 		config = function()
 			require("material").setup({
 				disable = {

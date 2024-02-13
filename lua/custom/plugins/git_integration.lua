@@ -13,12 +13,12 @@ return {
 		end,
 		config = function()
 			local git_blame = require("gitblame")
-			require("lualine").setup({
-				--
-			})
+			-- require("lualine").setup({
+			-- 	--
+			-- })
 		end,
 	},
-	{ "tpope/vim-rhubarb",  event = { "BufRead", "BufReadPost" }, priority = 1000 },
+	{ "tpope/vim-rhubarb", event = { "BufRead", "BufReadPost" }, priority = 1000 },
 	-- allows the integration of git functionality within neovim
 	{ "tpope/vim-fugitive", event = { "BufRead", "BufReadPost" }, priority = 1000 },
 	{

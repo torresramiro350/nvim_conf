@@ -1,6 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	event = "BufEnter",
+	-- event = "BufEnter",
+	enabled = false,
 	config = function()
 		-- Eviline config for lualine
 		-- Author: shadmansaleh
@@ -186,7 +187,7 @@ return {
 
 		-- Add components to right sections
 		ins_right({
-			"o:encoding",    -- option component same as &encoding in viml
+			"o:encoding", -- option component same as &encoding in viml
 			fmt = string.upper, -- I'm not sure why it's upper case either ;)
 			cond = conditions.hide_in_width,
 			color = { fg = cat_colors.green, gui = "bold" },
