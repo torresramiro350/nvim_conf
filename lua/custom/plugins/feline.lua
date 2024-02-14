@@ -7,6 +7,25 @@ return {
 		ctp_feline.setup({
 			--- default setup
 			-- if no options are passed, then the defaults are kept
+			assets = {
+				left_separator = "",
+				right_separator = "",
+				dir = "󰉖",
+				file = "󰈙",
+				lsp = {
+					server = "󰅡 ",
+					error = " ",
+					warning = " ",
+					info = " ",
+					hint = " ",
+				},
+				git = {
+					branch = "",
+					added = " ",
+					changed = " ",
+					removed = " ",
+				},
+			},
 		})
 
 		require("feline").setup({
