@@ -26,8 +26,16 @@ return {
 				},
 				integrations = {
 					--defaults
+					treesitter = true,
+					harpoon = true,
+					mason = true,
+					which_key = true,
+					cmp = true,
+					flash = true,
+					gitsigns = true,
 					notify = true,
 					telescope = true,
+					noice = true,
 				},
 				highlight_overrides = {
 					mocha = function(mocha)

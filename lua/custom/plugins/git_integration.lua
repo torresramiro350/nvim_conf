@@ -18,9 +18,29 @@ return {
 			-- })
 		end,
 	},
-	{ "tpope/vim-rhubarb", event = { "BufRead", "BufReadPost" }, priority = 1000 },
+	{
+		"tpope/vim-rhubarb",
+		event = { "BufRead", "BufReadPost" },
+		priority = 1000,
+		cond = function()
+			-- enable plugins only within a git repo
+			local current_dir = vim.fn.getcwd()
+			local git_dir = current_dir .. "/.git"
+			return vim.fn.isdirectory(git_dir) == 1
+		end,
+	},
 	-- allows the integration of git functionality within neovim
-	{ "tpope/vim-fugitive", event = { "BufRead", "BufReadPost" }, priority = 1000 },
+	{
+		"tpope/vim-fugitive",
+		event = { "BufRead", "BufReadPost" },
+		priority = 1000,
+		cond = function()
+			-- enable plugins only within a git repo
+			local current_dir = vim.fn.getcwd()
+			local git_dir = current_dir .. "/.git"
+			return vim.fn.isdirectory(git_dir) == 1
+		end,
+	},
 	{
 		priority = 1000,
 		-- Adds git related signs to the gutter, as well as utilities for managing changes
