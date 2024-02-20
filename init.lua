@@ -1,28 +1,15 @@
----@module Main configuration for neovim
----@author Ramiro (using Kickstart nvim)
+---@module init.lua Main configuration for neovim
+---@author Ramiro (using Kickstart nvim as base)
 
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+-- NOTE: load in the general options to use with vim
 require("vim_options.essential")
 
--- NOTE: Here is where you install your plugins.
 -- Load lazyvim's configuration
 require("lazyvim.init")
 
 -- load all the keymaps to a separate file
 require("keymaps.mappings")
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = "*",
-})
+require("groups.init")
 
 -- document existing key chains
 require("which-key").register({
@@ -51,6 +38,3 @@ require("neodev").setup()
 -- vim.g.material_style = "darker"
 -- vim.cmd("colorscheme material")
 vim.cmd("colorscheme catppuccin-mocha")
--- vim.cmd("colorscheme nordic")
--- vim.cmd("colorscheme tokyonight-moon")
--- vim.cmd("colorscheme tokyonight")
