@@ -27,13 +27,13 @@ return {
 		-- normally, but tab will fallback to indenting unless a non-whitespace character
 		-- has actually been typed.
 		--
-		local has_words_before = function()
-			if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
-				return false
-			end
-			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-			return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-		end
+		-- local has_words_before = function()
+		-- 	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+		-- 		return false
+		-- 	end
+		-- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+		-- 	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+		-- end
 		-- local function has_words_before()
 		--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 		--   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -45,7 +45,7 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local lspkind = require("lspkind")
-		local copilot = require("copilot.suggestion")
+		-- local copilot = require("copilot.suggestion")
 		require("luasnip.loaders.from_vscode").lazy_load()
 		luasnip.config.setup({})
 
@@ -89,7 +89,7 @@ return {
 				priority_weight = 2,
 				comparators = {
 					cmp.config.compare.exact,
-					require("copilot_cmp.comparators").prioritize,
+					-- require("copilot_cmp.comparators").prioritize,
 					cmp.config.compare.offset,
 					cmp.config.compare.recently_used,
 					-- require("clangd_extensions.cmp_scores"),
@@ -122,8 +122,8 @@ return {
 						-- so that it doesn't interfere with cmp or lsp completion suggestions
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 						-- cmp.select_next_item()
-					elseif copilot.is_visible() then
-						copilot.accept()
+						-- elseif copilot.is_visible() then
+						-- copilot.accept()
 					elseif luasnip.expand_or_locally_jumpable() then
 						luasnip.expand_or_jump()
 						-- little addition to introduce copilot's code completions
@@ -146,10 +146,10 @@ return {
 			-- source completion list
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp", group_index = 2 },
-				{ name = "copilot",  group_index = 2 },
-				{ name = "buffer",   group_index = 2 },
-				{ name = "luasnip",  group_index = 2 },
-				{ name = "path",     group_index = 2 },
+				-- { name = "copilot",  group_index = 2 },
+				{ name = "buffer", group_index = 2 },
+				{ name = "luasnip", group_index = 2 },
+				{ name = "path", group_index = 2 },
 			}),
 			-- configure lspkind for vs-code like pictograms in completion menu
 			formatting = {
@@ -157,7 +157,7 @@ return {
 					mode = "symbol",
 					maxwidth = 50,
 					ellipsis_char = "...",
-					symbol_map = { Copilot = " " },
+					-- symbol_map = { Copilot = " " },
 				}),
 			},
 		})

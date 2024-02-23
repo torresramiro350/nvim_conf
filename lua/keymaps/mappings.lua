@@ -1,5 +1,8 @@
 ---@module Mappings for neovim
----@author
+---@author R. Torres-Escobedo
+---@date Feb 23, 2024
+
+vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`

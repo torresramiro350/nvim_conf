@@ -1,4 +1,6 @@
 -- [[ Setting options ]]
+-- copilot settings
+vim.g.copilot_no_tab_map = true
 -- Place all the general Neovim options
 vim.g.gitblame_display_virtual_text = 1
 vim.g.mapleader = " "
