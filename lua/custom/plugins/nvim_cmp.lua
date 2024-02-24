@@ -127,8 +127,8 @@ return {
 					elseif luasnip.expand_or_locally_jumpable() then
 						luasnip.expand_or_jump()
 						-- little addition to introduce copilot's code completions
-					elseif has_words_before() then
-						cmp.complete()
+						-- elseif has_words_before() then
+						-- 	cmp.complete()
 					else
 						fallback()
 					end
@@ -147,9 +147,9 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp", group_index = 2 },
 				-- { name = "copilot",  group_index = 2 },
-				{ name = "buffer", group_index = 2 },
-				{ name = "luasnip", group_index = 2 },
-				{ name = "path", group_index = 2 },
+				{ name = "buffer",   group_index = 2 },
+				{ name = "luasnip",  group_index = 2 },
+				{ name = "path",     group_index = 2 },
 			}),
 			-- configure lspkind for vs-code like pictograms in completion menu
 			formatting = {

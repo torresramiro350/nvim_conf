@@ -1,7 +1,7 @@
 return {
 	"folke/flash.nvim",
 	as = "flash",
-	event = { "BufRead", "BufReadPost" },
+	event = { "InsertEnter" },
 	-- @type Flash.Config
 	opts = {
 		modes = {

@@ -7,9 +7,11 @@ return {
 			-- define the sources
 			timeout = 2000,
 			sources = {
+				-- mostly used for yaml and json (I don't use it for other filetypes)
 				null_ls.builtins.formatting.prettierd.with({
 					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json", "yaml" },
 				}),
+				-- markdown
 				null_ls.builtins.formatting.markdownlint.with({
 					filetypes = { "markdown" },
 				}),
@@ -17,49 +19,20 @@ return {
 				null_ls.builtins.formatting.stylua.with({
 					filetypes = { "lua" },
 				}),
-				-- python
-				null_ls.builtins.diagnostics.ruff.with({
-					filetypes = { "python" },
-				}),
-				null_ls.builtins.formatting.ruff.with({
-					filetypes = { "python" },
-				}),
+				--python
 				null_ls.builtins.formatting.isort.with({
 					filetypes = { "python" },
 				}),
-				-- null_ls.builtins.diagnostics.pylint.with({
-				-- 	filetypes = { "python" },
-				-- }),
-				-- c++
-				null_ls.builtins.formatting.clang_format.with({
-					filetypes = { "c", "cpp", "cs", "cuda" },
-				}),
-
+				-- cmake
 				null_ls.builtins.formatting.cmake_format.with({
 					filetypes = { "cmake" },
 				}),
-				-- rust
-				null_ls.builtins.formatting.rustfmt.with({
-					filetypes = { "rust" },
-				}),
-				--bash
-				null_ls.builtins.code_actions.shellcheck.with({
-					filetypes = { "sh", "bash", "zsh" },
-				}),
+				-- bash
 				null_ls.builtins.formatting.shfmt.with({
 					filetypes = { "sh", "bash", "zsh" },
 				}),
-				-- latex
-				null_ls.builtins.formatting.latexindent.with({
-					filetypes = { "tex", "bib" },
-				}),
 				null_ls.builtins.diagnostics.vale.with({
 					filetypes = { "tex", "bib" },
-				}),
-				-- TOML
-				null_ls.builtins.formatting.taplo.with({
-					filetypes = { "toml" },
-					exclude_filetypes = { "lua" },
 				}),
 			},
 		})
