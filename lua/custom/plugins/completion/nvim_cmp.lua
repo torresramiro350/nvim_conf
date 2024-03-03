@@ -34,11 +34,10 @@ return {
 		-- 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
 		-- 	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
 		-- end
-		-- local function has_words_before()
-		--   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-		--   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-		-- end
-		-- local luasnip = require("luasnip")
+		local function has_words_before()
+			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+			return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+		end
 
 		-- [[ Configure nvim-cmp ]]
 		-- See `:help cmp`
@@ -92,7 +91,7 @@ return {
 					-- require("copilot_cmp.comparators").prioritize,
 					cmp.config.compare.offset,
 					cmp.config.compare.recently_used,
-					-- require("clangd_extensions.cmp_scores"),
+					require("clangd_extensions.cmp_scores"),
 					cmp.config.compare.kind,
 					cmp.config.compare.sort_text,
 					cmp.config.compare.length,
@@ -121,14 +120,15 @@ return {
 						-- necessary for usage with Copilot
 						-- so that it doesn't interfere with cmp or lsp completion suggestions
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+						-- cmp.complete()
 						-- cmp.select_next_item()
 						-- elseif copilot.is_visible() then
 						-- copilot.accept()
 					elseif luasnip.expand_or_locally_jumpable() then
 						luasnip.expand_or_jump()
 						-- little addition to introduce copilot's code completions
-						-- elseif has_words_before() then
-						-- 	cmp.complete()
+					elseif has_words_before() then
+						cmp.complete()
 					else
 						fallback()
 					end

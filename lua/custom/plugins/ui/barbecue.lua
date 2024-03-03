@@ -10,7 +10,10 @@ return {
 		local barbecue = require("barbecue")
 		barbecue.setup({
 			-- add options here
-			theme = "catppuccin",
+			show_dirname = false,
+			show_basename = false,
+			-- theme = "catppuccin",
+			theme = "auto",
 			attach_navic = false,
 			create_autocmd = false,
 		})
