@@ -13,4 +13,12 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-require("lazy").setup("custom.plugins")
+require("lazy").setup({
+	{ import = "custom.plugins" },
+	{ import = "custom.plugins.ui" },
+	{ import = "custom.plugins.completion" },
+	{ import = "custom.plugins.git" },
+	{ import = "custom.plugins.lsp" },
+	{ import = "custom.plugins.cpp" },
+	{ import = "custom.plugins.rust" },
+})
