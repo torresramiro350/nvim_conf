@@ -8,5 +8,6 @@ return {
 			at_edge = "wrap",
 		})
 	end,
-	event = { "BufReadPre" },
+	event = { "UIEnter" },
+	-- enable = false,
 }

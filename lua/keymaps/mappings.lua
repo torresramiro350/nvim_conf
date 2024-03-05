@@ -31,9 +31,9 @@ vim.keymap.set("n", "<C-right>", require("smart-splits").resize_right, { desc = 
 -- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper split" })
 -- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })
 -- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
--- resize split lines
--- vim.keymap.set("n", "<C-up>", "<cmd>resize -2<cr>", { desc = "Resize buffers" })
--- vim.keymap.set("n", "<C-down>", "<cmd>resize +2<cr>", { desc = "Resize buffers" })
+-- -- resize split lines
+-- vim.keymap.set("n", "<C-up>", "<cmd>resize -2<cr>", { desc = "Increase buffer size" })
+-- vim.keymap.set("n", "<C-down>", "<cmd>resize +2<cr>", { desc = "Increase buffer size down" })
 -- vim.keymap.set("n", "<C-left>", "<cmd>vertical resize -2<cr>", { desc = "Resize split left" })
 -- vim.keymap.set("n", "<C-right>", "<cmd>vertical resize +2<cr>", { desc = "Resize split right" })
 
