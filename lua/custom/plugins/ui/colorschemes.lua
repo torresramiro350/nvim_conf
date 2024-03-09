@@ -8,20 +8,19 @@ return {
 			local cat = require("catppuccin")
 
 			-- local mocha = require("catppuccin.palettes").get_palette("mocha")
-
 			cat.setup({
-				styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+				styles = {            -- Handles the styles of general hi groups (see `:h highlight-args`):
 					comments = { "italic" }, -- Change the style of comments
 					conditionals = { "italic" },
 					loops = { "italic" },
-					functions = {},
+					functions = { "italic" },
 					keywords = { "italic" },
 					types = { "italic" },
 					-- strings = {},
 					-- variables = {},
 					-- numbers = {},
 					-- booleans = {},
-					-- properties = {},
+					properties = { "italic" },
 					-- operators = {},
 				},
 				integrations = {
