@@ -2,56 +2,13 @@
 ---@author R. Torres-Escobedo
 ---@date Feb 23, 2024
 
-vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
-vim.keymap.set("n", "<leader>q", "<cmd>:qa<cr>", { desc = "Close all buffers" })
-
--- some mappings for making life easier
-vim.keymap.set("i", "jj", "<Esc>", { desc = "escape" })
--- vim.keymap.set("n", "<leader>s", "<cmd>w<cr>", { desc = "Save changes" })
-vim.keymap.set("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
-vim.keymap.set("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
-vim.keymap.set("n", "<C-q>", "<C-w>q", { desc = "Close split buffer" })
-
-vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left, { desc = "Move to left split" })
-vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down, { desc = "Move to lower split" })
-vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up, { desc = "Move to upper split" })
-vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right, { desc = "Move to right split" })
-
-vim.keymap.set("n", "<C-up>", require("smart-splits").resize_up, { desc = "Resize buffer up" })
-vim.keymap.set("n", "<C-down>", require("smart-splits").resize_down, { desc = "Resize buffer down" })
-vim.keymap.set("n", "<C-left>", require("smart-splits").resize_left, { desc = "Resize buffer left" })
-vim.keymap.set("n", "<C-right>", require("smart-splits").resize_right, { desc = "Resize buffer right" })
-
--- NOTE: these keybindings are for usage without smart-splits
--- vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to lower split" })
--- vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to upper split" })
--- vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })
--- vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
--- -- resize split lines
--- vim.keymap.set("n", "<C-up>", "<cmd>resize -2<cr>", { desc = "Increase buffer size" })
--- vim.keymap.set("n", "<C-down>", "<cmd>resize +2<cr>", { desc = "Increase buffer size down" })
--- vim.keymap.set("n", "<C-left>", "<cmd>vertical resize -2<cr>", { desc = "Resize split left" })
--- vim.keymap.set("n", "<C-right>", "<cmd>vertical resize +2<cr>", { desc = "Resize split right" })
-
--- Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- making life easier here
--- vim.keymap.set('n', '<leader>w', "<cmd>s<cr>", {desc = "Save"} )
-
--- Diagnostic keymaps
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set("n", "<leader>o", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
-
--- Enable telescope fzf native, if installed
-pcall(require("telescope").load_extension, "fzf")
+-- small utility function to make defining keymaps easier
+local nmap = function(mode, keys, func, desc)
+	vim.keymap.set(mode, keys, func, { desc = desc })
+end
+local nmap_especial = function(mode, keys, func, desc, noremap)
+	vim.keymap.set(mode, keys, func, { desc = desc }, { noremap = noremap })
+end
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
@@ -77,35 +34,93 @@ local function find_git_root()
 	return git_root
 end
 
+-- COPILOT
+vim.keymap.set("i", "<C-l>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+
+-- some mappings for making life easier
+nmap("n", "<leader>q", "<cmd>:qa<cr>", "Close all buffers")
+nmap("i", "jj", "<Esc>", "escape")
+
+-- SPLIT BUFFERS
+nmap("n", "|", "<cmd>vsplit<cr>", "Vertical split")
+nmap("n", "\\", "<cmd>split<cr>", "Horizontal split")
+nmap("n", "<C-q>", "<C-w>q", "Close split buffer")
+-- vim.keymap.set("n", "<leader>s", "<cmd>w<cr>", { desc = "Save changes" })
+
+local splits = require("smart-splits")
+
+-- moving between buffers
+nmap("n", "<C-h>", splits.move_cursor_left, "Move to left split")
+nmap("n", "<C-l>", splits.move_cursor_right, "Move to right split")
+nmap("n", "<C-j>", splits.move_cursor_down, "Move to lower split")
+nmap("n", "<C-k>", splits.move_cursor_up, "Move to upper split")
+
+nmap("n", "<C-Up>", splits.resize_up, "Increase buffer size")
+nmap("n", "<C-Down>", splits.resize_down, "Increase buffer size down")
+nmap("n", "<C-Left>", splits.resize_left, "Resize split left")
+nmap("n", "<C-Right>", splits.resize_right, "Resize split right")
+
+-- NOTE: these keybindings are for usage without smart-splits
+-- nmap("n", "<C-j>", "<C-w>j", "Move to lower split")
+-- nmap("n", "<C-k>", "<C-w>k", nmap")
+-- vim.keymap.set("n", "<C-h>", "<C-w>h", nmap")
+-- vim.keymap.set("n", "<C-l>", "<C-w>l", "Move to right split")
+-- -- resize split lines
+-- nmap("n", "<C-up>", "<cmd>resize -2<cr>", "Increase buffer size")
+-- nmap("n", "<C-down>", "<cmd>resize +2<cr>", "Increase buffer size down")
+-- nmap("n", "<C-left>", "<cmd>vertical resize -2<cr>", "Resize split left")
+-- nmap("n", "<C-right>", "<cmd>vertical resize +2<cr>", "Resize split right")
+
+-- Remap for dealing with word wrap
+-- nmap("n", "k", "v:count == 0 ? 'gk' : 'k'", )
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- making life easier here
+-- vim.keymap.set('n', '<leader>w', "<cmd>s<cr>", {desc = "Save"} )
+
+-- Diagnostic keymaps
+nmap("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
+nmap("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
+nmap("n", "<leader>d", vim.diagnostic.open_float, "Open floating diagnostic message")
+nmap("n", "<leader>o", vim.diagnostic.setloclist, "Open diagnostics list")
+
+-- TELESCOPE
+local tel_bin = require("telescope.builtin")
+local tel = require("telescope")
+local tel_themes = require("telescope.themes")
+-- Enable telescope fzf native, if installed
+pcall(tel.load_extension, "fzf")
+
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
 	local git_root = find_git_root()
 	if git_root then
-		require("telescope.builtin").live_grep({
-			search_dirs = { git_root },
-		})
+		tel_bin.live_grep({ search_dirs = { git_root } })
 	end
 end
 
 vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 
--- See `:help telescope.builtin`
-vim.keymap.set("n", "<leader>?", require("telescope.builtin").oldfiles, { desc = "[?] Find recently opened files" })
-vim.keymap.set("n", "<leader><space>", require("telescope.builtin").buffers, { desc = "[ ] Find existing buffers" })
-vim.keymap.set("n", "<leader>/", function()
-	-- You can pass additional configuration to telescope to change theme, layout, etc.
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+nmap("n", "<leader>?", tel_bin.oldfiles, "[?] Find recently opened files")
+nmap("n", "<leader><space>", tel_bin.buffers, "[ ] Find existing buffers")
+nmap("n", "<leader>/", function()
+	tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
 		winblend = 10,
-		previewer = false,
+		previewer = true,
 	}))
-end, { desc = "[/] Fuzzily search in current buffer" })
+end, "[/] Fuzzily search in current buffer")
 
-vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { noremap = true })
-vim.keymap.set("n", "<leader>gf", require("telescope.builtin").git_files, { desc = "Search [G]it [F]iles" })
-vim.keymap.set("n", "<leader>sf", require("telescope.builtin").find_files, { desc = "[S]earch [F]iles" })
-vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "[S]earch [H]elp" })
-vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "[S]earch current [W]ord" })
-vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "[S]earch by [G]rep" })
-vim.keymap.set("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
-vim.keymap.set("n", "<leader>sd", require("telescope.builtin").diagnostics, { desc = "[S]earch [D]iagnostics" })
-vim.keymap.set("n", "<leader>sr", require("telescope.builtin").resume, { desc = "[S]earch [R]esume" })
+nmap_especial("n", "<leader>fb", tel.extensions.file_browser.file_browser, "File Browser", true)
+nmap("n", "<leader>gf", tel_bin.git_files, "Search [G]it [F]iles")
+nmap("n", "<leader>sf", tel_bin.find_files, "[S]earch [F]iles")
+nmap("n", "<leader>sh", tel_bin.help_tags, "[S]earch [H]elp")
+nmap("n", "<leader>sw", tel_bin.grep_string, "[S]earch current [W]ord")
+nmap("n", "<leader>sg", tel_bin.live_grep, "[S]earch by [G]rep")
+nmap("n", "<leader>sd", tel_bin.diagnostics, "[S]earch [D]iagnostics")
+nmap("n", "<leader>sr", tel_bin.resume, "[S]earch [R]esume")
+nmap("n", "<leader>sG", ":LiveGrepGitRoot<cr>", "[S]earch by [G]rep on Git Root")
