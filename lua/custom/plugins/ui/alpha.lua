@@ -53,7 +53,7 @@ return {
 			-- dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
 		}
 		dashboard.section.bottom_buttons.val = {
-			dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+			dashboard.button("q", "󰅚  Quit Neovim", ":qa<CR>"),
 		}
 
 		alpha.setup(dashboard.opts)
