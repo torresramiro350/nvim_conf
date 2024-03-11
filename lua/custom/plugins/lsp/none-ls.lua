@@ -31,9 +31,9 @@ return {
 				null_ls.builtins.formatting.shfmt.with({
 					filetypes = { "sh", "bash", "zsh" },
 				}),
-				null_ls.builtins.diagnostics.vale.with({
-					filetypes = { "tex", "bib" },
-				}),
+				-- null_ls.builtins.diagnostics.vale.with({
+				-- 	filetypes = { "tex", "bib" },
+				-- }),
 			},
 		})
 	end,

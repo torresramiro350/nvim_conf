@@ -10,6 +10,39 @@ return {
 		local dap, dapui = require("dap"), require("dapui")
 		local dap_python = require("dap-python")
 		dap_python.setup("/home/rtorres/miniforge3/envs/hal_310/bin/python")
+		dap.adapters.gdb = {
+			type = "executable",
+			command = "gdb",
+			args = { "-i", "dap" },
+		}
+
+		-- C
+		dap.configurations.c = {
+			{
+				name = "Launch",
+				type = "gdb",
+				request = "launch",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				cwd = "${workspaceFolder}",
+				stopAtBeginningOfMainSubprogram = false,
+			},
+		}
+
+		-- C++
+		dap.configurations.cpp = {
+			{
+				name = "Launch",
+				type = "gdb",
+				request = "launch",
+				program = function()
+					return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+				end,
+				cwd = "${workspaceFolder}",
+				stopAtBeginningOfMainSubprogram = false,
+			},
+		}
 
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
