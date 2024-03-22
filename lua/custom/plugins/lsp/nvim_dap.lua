@@ -4,6 +4,7 @@ return {
 	event = { "BufRead", "BufReadPost" },
 	dependencies = {
 		"rcarriga/nvim-dap-ui",
+		"nvim-neotest/nvim-nio",
 		"mfussenegger/nvim-dap-python",
 	},
 	config = function()

@@ -9,6 +9,7 @@ return {
 
 			-- local mocha = require("catppuccin.palettes").get_palette("mocha")
 			cat.setup({
+				no_italic = false,
 				styles = {            -- Handles the styles of general hi groups (see `:h highlight-args`):
 					comments = { "italic" }, -- Change the style of comments
 					conditionals = { "italic" },

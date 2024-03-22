@@ -116,6 +116,7 @@ nmap("n", "<leader>/", function()
 end, "[/] Fuzzily search in current buffer")
 
 nmap_especial("n", "<leader>fb", tel.extensions.file_browser.file_browser, "File Browser", true)
+nmap("n", "<leader>sb", tel_bin.buffers, "[S]earch [B]uffer")
 nmap("n", "<leader>gf", tel_bin.git_files, "Search [G]it [F]iles")
 nmap("n", "<leader>sf", tel_bin.find_files, "[S]earch [F]iles")
 nmap("n", "<leader>sh", tel_bin.help_tags, "[S]earch [H]elp")
