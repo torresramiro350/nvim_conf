@@ -13,7 +13,7 @@ return {
 		local neogit = require("neogit")
 		neogit.setup({})
 	end,
-	event = "VeryLazy",
+	event = { "BufReadPost" },
 	cond = function()
 		-- enable plugins only within a git repo
 		local current_dir = vim.fn.getcwd()

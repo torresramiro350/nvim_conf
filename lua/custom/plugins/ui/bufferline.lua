@@ -2,7 +2,7 @@
 return {
 	"akinsho/bufferline.nvim",
 	-- lazy = true,
-	event = "BufEnter",
+	event = { "BufReadPost" },
 	config = function()
 		-- vim.opt.termguicolors = true
 		vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<cr>", { desc = "Close current buffer" })
