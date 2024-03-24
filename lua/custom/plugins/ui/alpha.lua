@@ -1,40 +1,17 @@
 return {
 	"goolord/alpha-nvim",
-	lazy = true,
 	event = "VimEnter",
 	config = function()
-		-- require("alpha").setup(require("alpha.themes.dashboard").config)
-		-- require("alpha").setup(require("alpha.themes.startify").config)
 		local status_ok, alpha = pcall(require, "alpha")
 		if not status_ok then
 			return
 		end
-		-- local dashboard = require("alpha").setup({ "alpha.themes.dashboard" })
-		-- local dashboard = require("alpha").setup({ "alpha.themes.startify" })
 
-		-- local dashboard = require("alpha.themes.dashboard")
-		local dashboard = require("alpha.themes.startify")
+		local alpha = require("alpha")
+		local dashboard = require("alpha.themes.theta")
+		local dboard_base = require("alpha.themes.dashboard")
 
-		-- dashboard.nvim_web_devicons.highlight = true
-		-- dashboard.section.header.val = {
-		-- 	[[ ███       ███ ]],
-		-- 	[[████      ████]],
-		-- 	[[██████     █████]],
-		-- 	[[███████    █████]],
-		-- 	[[████████   █████]],
-		-- 	[[█████████  █████]],
-		-- 	[[█████ ████ █████]],
-		-- 	[[█████  █████████]],
-		-- 	[[█████   ████████]],
-		-- 	[[█████    ███████]],
-		-- 	[[█████     ██████]],
-		-- 	[[████      ████]],
-		-- 	[[ ███       ███ ]],
-		-- 	[[                  ]],
-		-- 	[[ N  E  O  V  I  M ]],
-		-- }
-
-		dashboard.section.header.val = {
+		dashboard.header.val = {
 			"           ▄ ▄                   ",
 			"       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
 			"       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
@@ -45,18 +22,14 @@ return {
 			"█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
 			"    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
 		}
-		dashboard.section.top_buttons.val = {
-			dashboard.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
-			dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-			dashboard.button("r", "󰄉  Recently used files", ":Telescope oldfiles <CR>"),
-			dashboard.button("t", "󱄽  Find text", ":Telescope live_grep <CR>"),
-			dashboard.button("c", "  Configuration", ":e ~/.config/nvim/init.lua<CR>"),
-			-- dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
+		dashboard.buttons.val = {
+			dboard_base.button("f", "󰈞  Find file", ":Telescope find_files <CR>"),
+			dboard_base.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
+			dboard_base.button("r", "󰄉  Recently used files", ":Telescope oldfiles <CR>"),
+			dboard_base.button("t", "󱄽  Find text", ":Telescope live_grep <CR>"),
+			dboard_base.button("c", "  Configuration", ":e ~/.config/nvim/init.lua<CR>"),
+			dboard_base.button("q", "󰅚  Quit Neovim", ":qa<CR>"),
 		}
-		dashboard.section.bottom_buttons.val = {
-			dashboard.button("q", "󰅚  Quit Neovim", ":qa<CR>"),
-		}
-
-		alpha.setup(dashboard.opts)
+		alpha.setup(dashboard.config)
 	end,
 }
