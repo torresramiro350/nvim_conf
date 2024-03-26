@@ -9,7 +9,7 @@ return {
 
 		-- Useful status updates for LSP
 		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-		{ "j-hui/fidget.nvim",                   opts = {} },
+		{ "j-hui/fidget.nvim", opts = {} },
 
 		-- Additional lua configuration, makes nvim stuff amazing!
 		"folke/neodev.nvim",
@@ -164,13 +164,23 @@ return {
 		-- 	single_file_support = true,
 		-- })
 
-		lspconfig.ruff_lsp.setup({
+		-- lspconfig.ruff_lsp.setup({
+		--   capabilities = capabilities,
+		--   on_attach = ruff_attach,
+		--   filetypes = { "python" },
+		-- })
+
+		lspconfig.ruff.setup({
+			cmd = { "ruff", "server", "--preview" },
+			filetypes = { "python" },
 			capabilities = capabilities,
 			on_attach = ruff_attach,
-			filetypes = { "python" },
+			-- on_attach = on_attach,
 		})
 
 		lspconfig.pyright.setup({
+			-- configuration section
+			cmd = { "pyright-langserver", "--stdio" },
 			capabilities = capabilities,
 			on_attach = on_attach,
 			settings = {
