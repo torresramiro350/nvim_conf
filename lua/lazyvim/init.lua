@@ -24,5 +24,6 @@ require("lazy").setup({
 	{ import = "custom.plugins.rust" },
 	{ import = "custom.plugins.treesitter" },
 	{ import = "custom.plugins.telescope" },
+	{ import = "custom.plugins.tmux" },
 	{ import = "custom.plugins.ui" },
 })
