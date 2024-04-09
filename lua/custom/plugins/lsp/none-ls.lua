@@ -28,6 +28,9 @@ return {
         null_ls.builtins.formatting.cmake_format.with({
           filetypes = { "cmake" },
         }),
+        null_ls.builtins.diagnostics.cmake_lint.with({
+          filetypes = { "cmake" },
+        }),
         -- bash
         null_ls.builtins.formatting.shfmt.with({
           filetypes = { "sh", "bash", "zsh" },
