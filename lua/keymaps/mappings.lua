@@ -4,34 +4,34 @@
 
 -- small utility function to make defining keymaps easier
 local nmap = function(mode, keys, func, desc)
-  vim.keymap.set(mode, keys, func, { desc = desc })
+	vim.keymap.set(mode, keys, func, { desc = desc })
 end
 local nmap_especial = function(mode, keys, func, desc, noremap)
-  vim.keymap.set(mode, keys, func, { desc = desc }, { noremap = noremap })
+	vim.keymap.set(mode, keys, func, { desc = desc }, { noremap = noremap })
 end
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
-  -- Use the current buffer's path as the starting point for the git search
-  local current_file = vim.api.nvim_buf_get_name(0)
-  local current_dir
-  local cwd = vim.fn.getcwd()
-  -- If the buffer is not associated with a file, return nil
-  if current_file == "" then
-    current_dir = cwd
-  else
-    -- Extract the directory from the current file's path
-    current_dir = vim.fn.fnamemodify(current_file, ":h")
-  end
+	-- Use the current buffer's path as the starting point for the git search
+	local current_file = vim.api.nvim_buf_get_name(0)
+	local current_dir
+	local cwd = vim.fn.getcwd()
+	-- If the buffer is not associated with a file, return nil
+	if current_file == "" then
+		current_dir = cwd
+	else
+		-- Extract the directory from the current file's path
+		current_dir = vim.fn.fnamemodify(current_file, ":h")
+	end
 
-  -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
-  if vim.v.shell_error ~= 0 then
-    print("Not a git repository. Searching on current working directory")
-    return cwd
-  end
-  return git_root
+	-- Find the Git root directory from the current file's path
+	local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+	if vim.v.shell_error ~= 0 then
+		print("Not a git repository. Searching on current working directory")
+		return cwd
+	end
+	return git_root
 end
 
 -- COPILOT
@@ -88,8 +88,8 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Diagnostic keymaps
 nmap("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
 nmap("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
-nmap("n", "<leader>d", vim.diagnostic.open_float, "Open floating diagnostic message")
-nmap("n", "<leader>o", vim.diagnostic.setloclist, "Open diagnostics list")
+nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
+nmap("n", "<leader>dl", vim.diagnostic.setloclist, "Open diagnostics list")
 
 -- TELESCOPE
 local tel_bin = require("telescope.builtin")
@@ -100,10 +100,10 @@ pcall(tel.load_extension, "fzf")
 
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
-  local git_root = find_git_root()
-  if git_root then
-    tel_bin.live_grep({ search_dirs = { git_root } })
-  end
+	local git_root = find_git_root()
+	if git_root then
+		tel_bin.live_grep({ search_dirs = { git_root } })
+	end
 end
 
 vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
@@ -111,10 +111,10 @@ vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 nmap("n", "<leader>?", tel_bin.oldfiles, "[?] Find recently opened files")
 nmap("n", "<leader><space>", tel_bin.buffers, "[ ] Find existing buffers")
 nmap("n", "<leader>/", function()
-  tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
-    winblend = 10,
-    previewer = true,
-  }))
+	tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
+		winblend = 10,
+		previewer = true,
+	}))
 end, "[/] Fuzzily search in current buffer")
 
 nmap_especial("n", "<leader>fb", tel.extensions.file_browser.file_browser, "File Browser", true)

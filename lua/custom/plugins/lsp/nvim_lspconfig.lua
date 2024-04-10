@@ -155,18 +155,19 @@ return {
     -- configure python server
     -- NOTE: only available for free with open source projects (hope to use
     -- it in the future)
-    -- lspconfig.sourcery.setup({
-    -- 	capabilities = capabilities,
-    -- 	on_attach = ruff_attach,
-    -- 	init_options = {
-    -- 		token = "user_dIGOG_nGdW97HxBFt5JzlXervkgAPuQqWm8_wJBBSpHEbiXhDywUnopZTvs",
-    -- 		-- extension_version = "vim.lsp",
-    -- 		-- editor_version = "vim",
-    -- 	},
-    -- 	filetypes = { "python" },
-    -- 	cmd = { "sourcery", "lsp" },
-    -- 	single_file_support = true,
-    -- })
+    lspconfig.sourcery.setup({
+      capabilities = capabilities,
+      -- on_attach = on_attach,
+      on_attach = ruff_attach,
+      init_options = {
+        token = "user_dIGOG_nGdW97HxBFt5JzlXervkgAPuQqWm8_wJBBSpHEbiXhDywUnopZTvs",
+        -- extension_version = "vim.lsp",
+        -- editor_version = "vim",
+      },
+      filetypes = { "python" },
+      cmd = { "sourcery", "lsp" },
+      single_file_support = true,
+    })
 
     -- lspconfig.ruff_lsp.setup({
     --   capabilities = capabilities,
