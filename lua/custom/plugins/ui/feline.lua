@@ -5,28 +5,16 @@ return {
 		local ctp_feline = require("catppuccin.groups.integrations.feline")
 
 		ctp_feline.setup({
+			--- default setup
 			-- inactive = {
 			-- 	"file_info",
 			-- },
-			--- default setup
-			-- if no options are passed, then the defaults are kept
-			assets = {
-				left_separator = "",
-				right_separator = "",
-				dir = "󰉖",
-				file = "󰈙",
+			view = {
 				lsp = {
-					server = "󰅡 ",
-					error = " ",
-					warning = " ",
-					info = " ",
-					hint = " ",
-				},
-				git = {
-					branch = "",
-					added = " ",
-					changed = " ",
-					removed = " ",
+					progress = true,
+					name = true,
+					separator = "|",
+					exclude_lsp_names = { "null-ls", "copilot" },
 				},
 			},
 		})
