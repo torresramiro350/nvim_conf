@@ -111,24 +111,36 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete({}),
         ["<CR>"] = cmp.mapping.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = true,
+          -- behavior = cmp.ConfirmBehavior.Replace,
+          -- select = true,
+          i = function(fallback)
+            if cmp.visible() and cmp.get_active_entry() then
+              cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+            else
+              fallback()
+            end
+          end,
+          s = cmp.mapping.confirm({ select = true }),
+          c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
         }),
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             -- elseif cmp.visible() then
             -- necessary for usage with Copilot
             -- so that it doesn't interfere with cmp or lsp completion suggestions
-            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            -- cmp.complete()
-            -- cmp.select_next_item()
-            -- elseif copilot.is_visible() then
-            -- copilot.accept()
-          elseif luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
+            if #cmp.get_entries() == 1 then
+              cmp.confirm({ select = true })
+            else
+              cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+            end
+            -- elseif luasnip.expand_or_locally_jumpable() then
+            --   luasnip.expand_or_jump()
             -- little addition to introduce copilot's code completions
           elseif has_words_before() then
             cmp.complete()
+            if #cmp.get_entries() == 1 then
+              cmp.confirm({ select = true })
+            end
           else
             fallback()
           end
