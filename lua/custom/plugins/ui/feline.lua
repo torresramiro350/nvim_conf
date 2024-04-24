@@ -1,6 +1,7 @@
 return {
   "freddiehaddad/feline.nvim",
   -- config = function(_, opts)
+  --
   config = function()
     -- SIMPLER SETUP
     local ctp_feline = require("catppuccin.groups.integrations.feline")
@@ -13,9 +14,9 @@ return {
       view = {
         lsp = {
           progress = true,
-          name = false,
+          name = true,
           separator = "|",
-          exclude_lsp_names = { "null-ls", "copilot" },
+          exclude_lsp_names = { "null-ls" },
         },
       },
     })
