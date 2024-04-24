@@ -5,6 +5,7 @@ return {
     config = function()
       vim.g.copilot_filetypes = {
         latex = false,
+        tex = false,
         python = true,
       }
     end,
