@@ -14,5 +14,5 @@ return {
 		vim.keymap.set("t", "<A-i>", '<c-\\><c-n><cmd>lua require("FTerm").toggle()<cr>', { desc = "Toggle terminal" })
 		vim.keymap.set("n", "<leader>lt", "<cmd>lua require('FTerm').run('lazygit')<cr>", { desc = "Lazygit" })
 	end,
-	event = "VeryLazy",
+	event = { "BufEnter" },
 }
