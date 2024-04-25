@@ -1,9 +1,6 @@
 return {
   "freddiehaddad/feline.nvim",
-  -- config = function(_, opts)
-  --
   config = function()
-    -- SIMPLER SETUP
     local ctp_feline = require("catppuccin.groups.integrations.feline")
 
     ctp_feline.setup({
@@ -24,6 +21,10 @@ return {
     require("feline").setup({
       components = ctp_feline.get(),
     })
+
+    -- require("feline").setup({})
+    -- require("feline").winbar.setup() -- to use winbar
+    -- require("feline").statuscolumn.setup() -- to use statuscolumn
   end,
   -- priority = 1000,
   after = "catppuccin",
