@@ -28,5 +28,6 @@ return {
   end,
   -- priority = 1000,
   after = "catppuccin",
+  -- event = { "BufReadPre", "BufReadPost" },
   event = "UIEnter",
 }
