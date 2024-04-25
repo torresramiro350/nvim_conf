@@ -200,11 +200,12 @@ return {
       -- on_attach = on_attach,
     })
 
-    lspconfig.basedpyright.setup({
-      -- using basedpyright which is a pyright's fork
-      -- https://detachhead.github.io/basedpyright/#/
+    lspconfig.pyright.setup({
+      -- using pyright which is a pyright's fork
+      -- https://detachhead.github.io/pyright/#/
       -- configuration section
-      cmd = { "basedpyright-langserver", "--stdio" },
+      -- basedpyright has a lot of nagging
+      cmd = { "pyright-langserver", "--stdio" },
       capabilities = capabilities,
       on_attach = on_attach,
       settings = {
