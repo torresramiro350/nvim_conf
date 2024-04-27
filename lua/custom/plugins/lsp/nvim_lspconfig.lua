@@ -1,6 +1,7 @@
 return {
   -- LSP Configuration & Plugins
   "neovim/nvim-lspconfig",
+  event = { "BufReadPre", "BufReadPost", "BufNewFile" },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
     "williamboman/mason.nvim",
@@ -349,5 +350,4 @@ return {
       end,
     })
   end,
-  event = { "BufReadPre", "BufNewFile" },
 }

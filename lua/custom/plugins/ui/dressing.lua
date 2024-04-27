@@ -1,4 +1,5 @@
 return {
   "stevearc/dressing.nvim",
-  event = "VeryLazy"
+  event = "CmdlineEnter",
+  -- event = "VeryLazy"
 }
