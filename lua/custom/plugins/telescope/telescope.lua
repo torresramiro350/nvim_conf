@@ -3,13 +3,15 @@ return {
   {
     "nvim-telescope/telescope-file-browser.nvim",
     -- event = "VeryLazy",
-    event = "VimEnter",
+    -- event = "VimEnter",
+    event = { "BufEnter" },
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
   {
     "nvim-telescope/telescope.nvim",
     -- event = "VeryLazy",
-    event = "VimEnter",
+    -- event = { "InsertEnter", "CmdLineEnter" },
+    event = { "InsertEnter", "CmdlineEnter" },
     config = function()
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
