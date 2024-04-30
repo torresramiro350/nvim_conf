@@ -8,9 +8,6 @@ return {
 		vim.keymap.set("n", "<leader>nF", "<cmd>Neogen file<cr>", { desc = "Generate file docs " })
 
 		require("neogen").setup({
-			-- snippet_engine = "luasnip",
-			-- snippet_engine = "vsnip",
-			-- snippet_engine = "snippy",
 			enabled = true,
 			input_after_comment = true,
 			languages = {
@@ -45,5 +42,4 @@ return {
 	end,
 	dependencies = { "nvim-treesitter/nvim-treesitter" },
 	event = { "BufReadPost", "InsertEnter" },
-	-- event = { "BufReadPost", "BufNewFile" },
 }
