@@ -166,6 +166,7 @@ return {
     -- configure python server
     -- NOTE: only available for free with open source projects (hope to use
     -- it in the future)
+
     local sourcery_file = io.open(vim.fn.expand("~/.config/nvim/sourcery_token"), "r")
     if file then
       MYTOKEN = sourcery_file:read("*line")
@@ -173,13 +174,12 @@ return {
     else
       print("No sourcery file found")
     end
+
     lspconfig.sourcery.setup({
       capabilities = capabilities,
-      -- on_attach = on_attach,
       on_attach = ruff_attach,
       init_options = {
         token = MYTOKEN,
-        -- extension_version = "vim.lsp",
         editor_version = "vim",
       },
       filetypes = { "python" },
@@ -202,10 +202,6 @@ return {
     })
 
     lspconfig.pyright.setup({
-      -- using pyright which is a pyright's fork
-      -- https://detachhead.github.io/pyright/#/
-      -- configuration section
-      -- basedpyright has a lot of nagging
       cmd = { "pyright-langserver", "--stdio" },
       capabilities = capabilities,
       on_attach = on_attach,
@@ -220,6 +216,22 @@ return {
       },
       single_file_support = true,
     })
+
+    -- lspconfig.pylyzer.setup({
+    --   cmd = { "pylyzer", "--server" },
+    --   capabilities = capabilities,
+    --   on_attach = on_attach,
+    --   filetypes = { "python" },
+    --   settings = {
+    --     python = {
+    --       checkOnType = false,
+    --       diagnostics = true,
+    --       inlayHints = true,
+    --       smartCompletion = true,
+    --     },
+    --   },
+    --   single_file_support = true,
+    -- })
 
     --bash
     lspconfig.bashls.setup({
