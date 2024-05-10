@@ -1,6 +1,7 @@
 return {
   "folke/noice.nvim",
   -- event = "VeryLazy",
+  -- event = "VimEnter",
   event = "CmdlineEnter",
   config = function()
     local noice = require("noice")

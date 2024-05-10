@@ -11,6 +11,7 @@ return {
     -- Useful status updates for LSP
     {
       "j-hui/fidget.nvim",
+      event = { "BufReadPre", "BufReadPost", "BufNewFile" },
       config = function()
         require("fidget").setup({
           progress = {
@@ -168,7 +169,7 @@ return {
     -- it in the future)
 
     local sourcery_file = io.open(vim.fn.expand("~/.config/nvim/sourcery_token"), "r")
-    if file then
+    if sourcery_file then
       MYTOKEN = sourcery_file:read("*line")
       sourcery_file.close()
     else
