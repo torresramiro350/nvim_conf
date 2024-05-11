@@ -1,5 +1,6 @@
 return {
-  event = "VeryLazy",
+  -- event = "VeryLazy",
+  event = "UIEnter",
   "rcarriga/nvim-notify",
   config = function()
     vim.notify = require("notify")
