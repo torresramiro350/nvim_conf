@@ -2,7 +2,8 @@
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  event = "BufEnter",
+  -- event = "BufEnter",
+  event = {"BufReadPre", "BufNewFile"},
   version = "*",
   dependencies = {
     "nvim-lua/plenary.nvim",

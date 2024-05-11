@@ -4,13 +4,38 @@ return {
   event = { "BufReadPre", "BufReadPost", "BufNewFile" },
   dependencies = {
     -- Automatically install LSPs to stdpath for neovim
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    {
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup({})
+      end,
+      event = "VeryLazy",
+      -- event = "LazyVimStarted",
+    },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      config = function()
+        require("mason-lspconfig").setup({
+          -- ensure_installed = {}
+        })
+      end,
+      -- event = "UIEnter",
+      event = "VeryLazy",
+      after = "mason",
+      -- event = "CmdlineEnter",
+    },
     { "antosha417/nvim-lsp-file-operations", config = true },
 
     -- Useful status updates for LSP
     {
       "j-hui/fidget.nvim",
+      dependencies = {
+        {
+          "folke/neodev.nvim",
+          event = "VeryLazy",
+          -- event = "BufRead *.lua",
+        },
+      },
       event = { "BufReadPre", "BufReadPost", "BufNewFile" },
       config = function()
         require("fidget").setup({
@@ -27,8 +52,8 @@ return {
       end,
     },
 
-    -- Additional lua configuration, makes nvim stuff amazing!
-    "folke/neodev.nvim",
+    -- -- Additional lua configuration, makes nvim stuff amazing!
+    -- "folke/neodev.nvim",
   },
   config = function()
     --import lspconfig plugin
