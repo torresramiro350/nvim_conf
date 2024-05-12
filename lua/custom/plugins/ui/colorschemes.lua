@@ -66,7 +66,8 @@ return {
   {
     "marko-cerovac/material.nvim",
     priority = 1000,
-    lazy = true,
+    -- lazy = true,
+    enabled = false,
     config = function()
       require("material").setup({
         disable = {
@@ -119,7 +120,8 @@ return {
   },
   {
     "navarasu/onedark.nvim",
-    lazy = true,
+    -- lazy = true,
+    enabled = false,
     -- priority = 1000,
     config = function()
       require("onedark").setup({
