@@ -4,69 +4,67 @@
 ---@version
 
 -- small utility function to make defining keymaps easier
-local nmap = function(mode, keys, func, desc)
-	vim.keymap.set(mode, keys, func, { desc = desc })
-end
-local nmap_especial = function(mode, keys, func, desc, noremap)
-	vim.keymap.set(mode, keys, func, { desc = desc }, { noremap = noremap })
+local nmap = function(mode, keys, func, additional_args)
+  additional_args = additional_args or {}
+  vim.keymap.set(mode, keys, func, additional_args)
 end
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
-	-- Use the current buffer's path as the starting point for the git search
-	local current_file = vim.api.nvim_buf_get_name(0)
-	local current_dir
-	local cwd = vim.fn.getcwd()
-	-- If the buffer is not associated with a file, return nil
-	if current_file == "" then
-		current_dir = cwd
-	else
-		-- Extract the directory from the current file's path
-		current_dir = vim.fn.fnamemodify(current_file, ":h")
-	end
+  -- Use the current buffer's path as the starting point for the git search
+  local current_file = vim.api.nvim_buf_get_name(0)
+  local current_dir
+  local cwd = vim.fn.getcwd()
+  -- If the buffer is not associated with a file, return nil
+  if current_file == "" then
+    current_dir = cwd
+  else
+    -- Extract the directory from the current file's path
+    current_dir = vim.fn.fnamemodify(current_file, ":h")
+  end
 
-	-- Find the Git root directory from the current file's path
-	local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
-	if vim.v.shell_error ~= 0 then
-		print("Not a git repository. Searching on current working directory")
-		return cwd
-	end
-	return git_root
+  -- Find the Git root directory from the current file's path
+  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+  if vim.v.shell_error ~= 0 then
+    print("Not a git repository. Searching on current working directory")
+    return cwd
+  end
+  return git_root
 end
 
 -- COPILOT
-vim.keymap.set("i", "<C-E>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
+nmap("i", "<C-E>", 'copilot#Accept("\\<CR>")', { expr = true, replace_keycodes = false })
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
-vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+nmap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- some mappings for making life easier
-nmap("n", "<leader>q", "<cmd>:qa<cr>", "Close all buffers")
-nmap("i", "jj", "<Esc>", "escape")
+nmap("n", "<leader>q", "<cmd>qa<cr>", { desc = "Close all buffers" })
+nmap("i", "jj", "<Esc>", { desc = "escape" })
 
 -- SPLIT BUFFERS
-nmap("n", "|", "<cmd>vsplit<cr>", "Vertical split")
-nmap("n", "\\", "<cmd>split<cr>", "Horizontal split")
-nmap("n", "<C-q>", "<C-w>q", "Close split buffer")
+nmap("n", "|", "<cmd>vsplit<cr>", { desc = "Vertical split" })
+nmap("n", "\\", "<cmd>split<cr>", { desc = "Horizontal split" })
+nmap("n", "<C-q>", "<C-w>q", { desc = "Close split buffer" })
 -- vim.keymap.set("n", "<leader>s", "<cmd>w<cr>", { desc = "Save changes" })
 
 -- moving between buffers
 
 -- Remap for dealing with word wrap
 -- nmap("n", "k", "v:count == 0 ? 'gk' : 'k'", )
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+nmap("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+nmap("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- making life easier here
 -- vim.keymap.set('n', '<leader>w', "<cmd>s<cr>", {desc = "Save"} )
 
 -- Diagnostic keymaps
-nmap("n", "[d", vim.diagnostic.goto_prev, "Go to previous diagnostic message")
-nmap("n", "]d", vim.diagnostic.goto_next, "Go to next diagnostic message")
-nmap("n", "<leader>df", vim.diagnostic.open_float, "Open floating diagnostic message")
-nmap("n", "<leader>dl", vim.diagnostic.setloclist, "Open diagnostics list")
+nmap("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
+nmap("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic message" })
+nmap("n", "<leader>df", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+nmap("n", "<leader>dl", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
 -- TELESCOPE
 local tel_bin = require("telescope.builtin")
@@ -77,33 +75,33 @@ pcall(tel.load_extension, "fzf")
 
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
-	local git_root = find_git_root()
-	if git_root then
-		tel_bin.live_grep({ search_dirs = { git_root } })
-	end
+  local git_root = find_git_root()
+  if git_root then
+    tel_bin.live_grep({ search_dirs = { git_root } })
+  end
 end
 
 vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 
-nmap("n", "<leader>?", tel_bin.oldfiles, "[?] Find recently opened files")
-nmap("n", "<leader><space>", tel_bin.buffers, "[ ] Find existing buffers")
+nmap("n", "<leader>?", tel_bin.oldfiles, { desc = "[?] Find recently opened files" })
+nmap("n", "<leader><space>", tel_bin.buffers, { desc = "[ ] Find existing buffers" })
 nmap("n", "<leader>/", function()
-	tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
-		winblend = 10,
-		previewer = true,
-	}))
-end, "[/] Fuzzily search in current buffer")
+  tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
+    winblend = 10,
+    previewer = true,
+  }))
+end, { desc = "[/] Fuzzily search in current buffer" })
 
-nmap_especial("n", "<leader>fb", tel.extensions.file_browser.file_browser, "File Browser", true)
-nmap("n", "<leader>sb", tel_bin.buffers, "[S]earch [B]uffer")
-nmap("n", "<leader>gf", tel_bin.git_files, "Search [G]it [F]iles")
-nmap("n", "<leader>sf", tel_bin.find_files, "[S]earch [F]iles")
-nmap("n", "<leader>sh", tel_bin.help_tags, "[S]earch [H]elp")
-nmap("n", "<leader>sw", tel_bin.grep_string, "[S]earch current [W]ord")
-nmap("n", "<leader>sg", tel_bin.live_grep, "[S]earch by [G]rep")
-nmap("n", "<leader>sd", tel_bin.diagnostics, "[S]earch [D]iagnostics")
-nmap("n", "<leader>sr", tel_bin.resume, "[S]earch [R]esume")
-nmap("n", "<leader>sG", ":LiveGrepGitRoot<cr>", "[S]earch by [G]rep on Git Root")
+nmap("n", "<leader>fb", tel.extensions.file_browser.file_browser, { desc = "File Browser", noremap = true })
+nmap("n", "<leader>sb", tel_bin.buffers, { desc = "[S]earch [B]uffer" })
+nmap("n", "<leader>gf", tel_bin.git_files, { desc = "Search [G]it [F]iles" })
+nmap("n", "<leader>sf", tel_bin.find_files, { desc = "[S]earch [F]iles" })
+nmap("n", "<leader>sh", tel_bin.help_tags, { desc = "[S]earch [H]elp" })
+nmap("n", "<leader>sw", tel_bin.grep_string, { desc = "[S]earch current [W]ord" })
+nmap("n", "<leader>sg", tel_bin.live_grep, { desc = "[S]earch by [G]rep" })
+nmap("n", "<leader>sd", tel_bin.diagnostics, { desc = "[S]earch [D]iagnostics" })
+nmap("n", "<leader>sr", tel_bin.resume, { desc = "[S]earch [R]esume" })
+nmap("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
 
 -- local splits = require("smart-splits")
 -- local smart_splits = require("smart_splits")
@@ -119,12 +117,12 @@ nmap("n", "<leader>sG", ":LiveGrepGitRoot<cr>", "[S]earch by [G]rep on Git Root"
 -- nmap("n", "<C-Right>", smart_splits.resize_right, "Resize split right")
 
 -- NOTE: these keybindings are for usage without smart-splits
-nmap("n", "<C-j>", "<c-w>j", "Move to lower split")
-nmap("n", "<C-k>", "<c-w>k", "Move to upper split")
-nmap("n", "<C-h>", "<c-w>h", "Move to left split")
-nmap("n", "<C-h>", "<c-w>l", "Move to right split")
+nmap("n", "<C-j>", "<c-w>j", { desc = "Move to lower split" })
+nmap("n", "<C-k>", "<c-w>k", { desc = "Move to upper split" })
+nmap("n", "<C-h>", "<c-w>h", { desc = "Move to left split" })
+nmap("n", "<C-h>", "<c-w>l", { desc = "Move to right split" })
 -- resize split lines
-nmap("n", "<C-up>", "<cmd>resize -2<cr>", "Increase buffer size")
-nmap("n", "<C-down>", "<cmd>resize +2<cr>", "Increase buffer size down")
-nmap("n", "<C-left>", "<cmd>vertical resize -2<cr>", "Resize split left")
-nmap("n", "<C-right>", "<cmd>vertical resize +2<cr>", "Resize split right")
+nmap("n", "<C-up>", "<cmd>resize -2<cr>", { desc = "Increase buffer size" })
+nmap("n", "<C-down>", "<cmd>resize +2<cr>", { desc = "Increase buffer size down" })
+nmap("n", "<C-left>", "<cmd>vertical resize -2<cr>", { desc = "Resize split left" })
+nmap("n", "<C-right>", "<cmd>vertical resize +2<cr>", { desc = "Resize split right" })
