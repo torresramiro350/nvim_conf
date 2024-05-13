@@ -103,19 +103,6 @@ nmap("n", "<leader>sd", tel_bin.diagnostics, { desc = "[S]earch [D]iagnostics" }
 nmap("n", "<leader>sr", tel_bin.resume, { desc = "[S]earch [R]esume" })
 nmap("n", "<leader>sG", ":LiveGrepGitRoot<cr>", { desc = "[S]earch by [G]rep on Git Root" })
 
--- local splits = require("smart-splits")
--- local smart_splits = require("smart_splits")
--- local smart_splits = require("smart-splits")
--- nmap("n", "<C-h>", smart_splits.move_cursor_left, "Move to left split")
--- nmap("n", "<C-l>", smart_splits.move_cursor_right, "Move to right split")
--- nmap("n", "<C-j>", smart_splits.move_cursor_down, "Move to lower split")
--- nmap("n", "<C-k>", smart_splits.move_cursor_up, "Move to upper split")
--- --
--- nmap("n", "<C-Up>", smart_splits.resize_up, "Increase buffer size")
--- nmap("n", "<C-Down>", smart_splits.resize_down, "Increase buffer size down")
--- nmap("n", "<C-Left>", smart_splits.resize_left, "Resize split left")
--- nmap("n", "<C-Right>", smart_splits.resize_right, "Resize split right")
-
 -- NOTE: these keybindings are for usage without smart-splits
 nmap("n", "<C-j>", "<c-w>j", { desc = "Move to lower split" })
 nmap("n", "<C-k>", "<c-w>k", { desc = "Move to upper split" })
