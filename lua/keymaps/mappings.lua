@@ -5,34 +5,34 @@
 
 -- small utility function to make defining keymaps easier
 local nmap = function(mode, keys, func, desc)
-  vim.keymap.set(mode, keys, func, { desc = desc })
+	vim.keymap.set(mode, keys, func, { desc = desc })
 end
 local nmap_especial = function(mode, keys, func, desc, noremap)
-  vim.keymap.set(mode, keys, func, { desc = desc }, { noremap = noremap })
+	vim.keymap.set(mode, keys, func, { desc = desc }, { noremap = noremap })
 end
 
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
-  -- Use the current buffer's path as the starting point for the git search
-  local current_file = vim.api.nvim_buf_get_name(0)
-  local current_dir
-  local cwd = vim.fn.getcwd()
-  -- If the buffer is not associated with a file, return nil
-  if current_file == "" then
-    current_dir = cwd
-  else
-    -- Extract the directory from the current file's path
-    current_dir = vim.fn.fnamemodify(current_file, ":h")
-  end
+	-- Use the current buffer's path as the starting point for the git search
+	local current_file = vim.api.nvim_buf_get_name(0)
+	local current_dir
+	local cwd = vim.fn.getcwd()
+	-- If the buffer is not associated with a file, return nil
+	if current_file == "" then
+		current_dir = cwd
+	else
+		-- Extract the directory from the current file's path
+		current_dir = vim.fn.fnamemodify(current_file, ":h")
+	end
 
-  -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
-  if vim.v.shell_error ~= 0 then
-    print("Not a git repository. Searching on current working directory")
-    return cwd
-  end
-  return git_root
+	-- Find the Git root directory from the current file's path
+	local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+	if vim.v.shell_error ~= 0 then
+		print("Not a git repository. Searching on current working directory")
+		return cwd
+	end
+	return git_root
 end
 
 -- COPILOT
@@ -77,10 +77,10 @@ pcall(tel.load_extension, "fzf")
 
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
-  local git_root = find_git_root()
-  if git_root then
-    tel_bin.live_grep({ search_dirs = { git_root } })
-  end
+	local git_root = find_git_root()
+	if git_root then
+		tel_bin.live_grep({ search_dirs = { git_root } })
+	end
 end
 
 vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
@@ -88,10 +88,10 @@ vim.api.nvim_create_user_command("LiveGrepGitRoot", live_grep_git_root, {})
 nmap("n", "<leader>?", tel_bin.oldfiles, "[?] Find recently opened files")
 nmap("n", "<leader><space>", tel_bin.buffers, "[ ] Find existing buffers")
 nmap("n", "<leader>/", function()
-  tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
-    winblend = 10,
-    previewer = true,
-  }))
+	tel_bin.current_buffer_fuzzy_find(tel_themes.get_dropdown({
+		winblend = 10,
+		previewer = true,
+	}))
 end, "[/] Fuzzily search in current buffer")
 
 nmap_especial("n", "<leader>fb", tel.extensions.file_browser.file_browser, "File Browser", true)
@@ -128,10 +128,3 @@ nmap("n", "<C-up>", "<cmd>resize -2<cr>", "Increase buffer size")
 nmap("n", "<C-down>", "<cmd>resize +2<cr>", "Increase buffer size down")
 nmap("n", "<C-left>", "<cmd>vertical resize -2<cr>", "Resize split left")
 nmap("n", "<C-right>", "<cmd>vertical resize +2<cr>", "Resize split right")
-
--- Neogen keymaps
-nmap("n", "<leader>nf", "<cmd>Neogen func<cr>", "Generate func docs ")
-nmap("n", "<leader>nc", "<cmd>Neogen class<cr>", "Generate class docs ")
-nmap("n", "<leader>nF", "<cmd>Neogen file<cr>", "Generate file docs ")
-nmap("i", "<C-l>", require("neogen").jump_next, "Jump to next annotation")
-nmap("i", "<C-h>", require("neogen").jump_prev, "Jump to previous annotation")
