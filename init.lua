@@ -1,5 +1,3 @@
----@module init.lua Main configuration for neovim
----@author Ramiro (using Kickstart nvim as base)
 
 -- NOTE: load in the general options to use with vim
 require("vim_options.essential")

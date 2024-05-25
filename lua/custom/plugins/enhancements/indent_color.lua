@@ -2,7 +2,7 @@ return {
 	-- Add indentation guides even on blank lines
 	"lukas-reineke/indent-blankline.nvim",
 	-- See `:help ibl`
-	event = { "BufReadPost", "InsertEnter" },
+	event = { "BufReadPre", "BufReadPost", "BufNewFile" },
 	main = "ibl",
 	config = function()
 		local mocha_palette = require("catppuccin.palettes").get_palette("mocha")
@@ -27,7 +27,8 @@ return {
 		end)
 		-- vim.g.rainbow_delimiters = { highlight = highlight }
 		-- require("ibl").setup({ scope = { highlight = highlight } })
-		-- hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+		-- hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_etmark)
+
 		require("ibl").setup({
 			indent = { highlight = highlight },
 		})

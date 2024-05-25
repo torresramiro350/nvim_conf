@@ -1,6 +1,6 @@
 -- "gc" to comment visual regions/lines
 return {
-  "numToStr/Comment.nvim",
-  opts = {},
-  event = { "BufReadPre", "BufNewFile" },
+	"numToStr/Comment.nvim",
+	opts = {},
+	event = { "BufReadPre", "BufReadPost", "BufNewFile" },
 }

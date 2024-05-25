@@ -1,21 +1,23 @@
 -- Bufferline
 return {
   "akinsho/bufferline.nvim",
-  -- lazy = true,
   -- load after catppuccin to ensure the correct highlighting
-  after = "catppuccin",
-  event = { "BufReadPre", "BufReadPost" },
+  event = { "BufNewFile", "BufReadPre", "BufReadPost" },
   config = function()
+    local nmap = function(mode, keys, func, additional_args)
+      additional_args = additional_args or {}
+      vim.keymap.set(mode, keys, func, additional_args)
+    end
     -- vim.opt.termguicolors = true
-    vim.keymap.set("n", "<leader>bc", "<cmd>BufferLinePickClose<cr>", { desc = "Close current buffer" })
-    vim.keymap.set("n", "<tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
-    vim.keymap.set("n", "<s-tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous tab" })
+    nmap("n", "<leader>bc", "<cmd>BufferLinePickClose<cr>", { desc = "Close current buffer" })
+    nmap("n", "<tab>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+    nmap("n", "<s-tab>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous tab" })
     -- vim.keymap.set("n", "[f", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
     -- vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Previous tab" })
-    vim.keymap.set("n", "<leader>ba", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close all other buffers" })
-    vim.keymap.set("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>", { desc = "Close next tab" })
-    vim.keymap.set("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", { desc = "Close previous tab" })
-    vim.keymap.set("n", "<leader>bq", "<cmd>BufferLineGroupClose ungrouped<cr>", { desc = "Close group" })
+    nmap("n", "<leader>ba", "<cmd>BufferLineCloseOthers<cr>", { desc = "Close all other buffers" })
+    nmap("n", "<leader>br", "<cmd>BufferLineCloseRight<cr>", { desc = "Close next tab" })
+    nmap("n", "<leader>bl", "<cmd>BufferLineCloseLeft<cr>", { desc = "Close previous tab" })
+    nmap("n", "<leader>bq", "<cmd>BufferLineGroupClose ungrouped<cr>", { desc = "Close group" })
     local bufferline = require("bufferline")
 
     bufferline.setup({
