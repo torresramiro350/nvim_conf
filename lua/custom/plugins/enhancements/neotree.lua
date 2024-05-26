@@ -1,9 +1,6 @@
--- vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  -- event = "BufEnter",
-  event = {"BufReadPre", "BufNewFile"},
+  event = { "BufReadPre", "BufNewFile" },
   version = "*",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -11,10 +8,15 @@ return {
     "MunifTanjim/nui.nvim",
   },
   config = function()
-    require("neo-tree").setup({
+    local nmap = function(mode, keys, func, additional_args)
+      additional_args = additional_args or {}
+      vim.keymap.set(mode, keys, func, additional_args)
+    end
+    local neotree = require("neo-tree")
+    neotree.setup({
       source_selector = {
         winbar = true,
-        statusline = true,
+        statusline = false,
         show_scrolled_off_parent_node = false,
         pop_up_border_style = "rounded",
         sources = {
@@ -33,6 +35,6 @@ return {
         },
       },
     })
-    vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "File list" })
+    nmap("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "File list" })
   end,
 }

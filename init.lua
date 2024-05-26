@@ -1,4 +1,3 @@
-
 -- NOTE: load in the general options to use with vim
 require("vim_options.essential")
 

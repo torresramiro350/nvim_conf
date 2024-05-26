@@ -4,7 +4,7 @@ return {
 	-- don't load the plugin until we start typing
 	-- event = { "InsertEnter" },
 	-- load once the file is read into buffer
-	event = { "InsertEnter" },
+	event = { "BufReadPre", "BufReadPost", "InsertEnter" },
 	config = function()
 		local nvim_surround_opts = require("nvim-surround")
 		nvim_surround_opts.setup({

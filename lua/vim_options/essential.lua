@@ -1,4 +1,6 @@
 -- [[ Setting options ]]
+-- nerd fonts
+vim.g.have_nerd_font = true
 -- copilot settings
 vim.g.copilot_no_tab_map = true
 -- Place all the general Neovim options

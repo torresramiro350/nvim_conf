@@ -203,7 +203,6 @@ return {
       filetypes = { "python" },
       capabilities = capabilities,
       on_attach = ruff_attach,
-      -- on_attach = on_attach,
     })
 
     lspconfig.pyright.setup({
@@ -222,11 +221,10 @@ return {
       single_file_support = true,
     })
 
-    -- lspconfig.pylyzer.setup({
-    --   cmd = { "pylyzer", "--server" },
+    -- require("lspconfig").pylyzer.setup({
     --   capabilities = capabilities,
     --   on_attach = on_attach,
-    --   filetypes = { "python" },
+    --   single_file_support = true,
     --   settings = {
     --     python = {
     --       checkOnType = false,
@@ -235,7 +233,6 @@ return {
     --       smartCompletion = true,
     --     },
     --   },
-    --   single_file_support = true,
     -- })
 
     --bash
