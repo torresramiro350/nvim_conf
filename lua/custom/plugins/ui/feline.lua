@@ -1,33 +1,34 @@
 return {
-  "freddiehaddad/feline.nvim",
-  config = function()
-    local ctp_feline = require("catppuccin.groups.integrations.feline")
+	"freddiehaddad/feline.nvim",
+	enabled = false,
+	config = function()
+		local ctp_feline = require("catppuccin.groups.integrations.feline")
 
-    ctp_feline.setup({
-      --- default setup
-      inactive = {
-        -- "file_info",
-      },
-      view = {
-        lsp = {
-          progress = true,
-          name = true,
-          separator = "|",
-          exclude_lsp_names = { "null-ls" },
-        },
-      },
-    })
+		ctp_feline.setup({
+			--- default setup
+			inactive = {
+				-- "file_info",
+			},
+			view = {
+				lsp = {
+					progress = true,
+					name = true,
+					separator = "|",
+					exclude_lsp_names = { "null-ls" },
+				},
+			},
+		})
 
-    require("feline").setup({
-      components = ctp_feline.get(),
-    })
+		require("feline").setup({
+			components = ctp_feline.get(),
+		})
 
-    -- require("feline").setup({})
-    -- require("feline").winbar.setup() -- to use winbar
-    -- require("feline").statuscolumn.setup() -- to use statuscolumn
-  end,
-  -- priority = 1000,
-  after = "catppuccin",
-  -- event = { "BufReadPre", "BufReadPost" },
-  event = "UIEnter",
+		-- require("feline").setup({})
+		-- require("feline").winbar.setup() -- to use winbar
+		-- require("feline").statuscolumn.setup() -- to use statuscolumn
+	end,
+	-- priority = 1000,
+	after = "catppuccin",
+	-- event = { "BufReadPre", "BufReadPost" },
+	event = "UIEnter",
 }

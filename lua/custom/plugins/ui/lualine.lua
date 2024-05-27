@@ -1,28 +1,50 @@
 return {
   "nvim-lualine/lualine.nvim",
-  -- event = "BufEnter",
-  enabled = false,
+  event = "UIEnter",
+  enabled = true,
+  -- config = function()
+  --   -- Eviline config for lualine
+  --   -- Author: shadmansaleh
+  --   -- Credit: glepnir
+  --   local lualine = require("lualine")
+  --
+  --   -- Color table for highlights
+  --   -- stylua: ignore
+  --   lualine.setup({
+  --     options = {
+  --       theme = "auto",
+  --       -- sections_separators =
+  --       component_separators = { left = '', right = '' },
+  --       section_separators = { left = '', right = '' },
+  --       -- section_separators = { left = '', right = '' },
+  --       -- component_separators = { left = '', right = '' },
+  --     }
+  --   })
+  --
+  -- end,
+
   config = function()
     -- Eviline config for lualine
     -- Author: shadmansaleh
     -- Credit: glepnir
     local lualine = require("lualine")
-
     local mocha = require("catppuccin.palettes").get_palette("mocha")
+
     -- Color table for highlights
     -- stylua: ignore
     local colors = {
-      bg       = '#202328',
-      fg       = '#bbc2cf',
-      yellow   = '#ECBE7B',
-      cyan     = '#008080',
-      darkblue = '#081633',
-      green    = '#98be65',
-      orange   = '#FF8800',
-      violet   = '#a9a1e1',
-      magenta  = '#c678dd',
-      blue     = '#51afef',
-      red      = '#ec5f67',
+      -- bg       = mocha.crust,    -- '#202328',
+      bg       = mocha.mantle,   -- '#202328',
+      fg       = mocha.subtext0, -- '#bbc2cf',
+      yellow   = mocha.yellow,   --'#ECBE7B',
+      cyan     = mocha.sky,      -- '#008080',
+      darkblue = mocha.sapphire, -- '#081633',
+      green    = mocha.green,    --'#98be65',
+      orange   = mocha.peach,    --'#FF8800',
+      violet   = mocha.mauve,    --'#a9a1e1',
+      magenta  = mocha.pink,     --'#c678dd',
+      blue     = mocha.blue,     --'#51afef',
+      red      = mocha.red       -- '#ec5f67',
     }
 
     local conditions = {
@@ -86,7 +108,8 @@ return {
 
     ins_left({
       function()
-        return "▊"
+        -- return "▊"
+        return ""
       end,
       color = { fg = colors.blue },   -- Sets highlighting of component
       padding = { left = 0, right = 1 }, -- We don't need space before this
@@ -179,7 +202,8 @@ return {
         return msg
       end,
       icon = " LSP:",
-      color = { fg = "#ffffff", gui = "bold" },
+      -- color = { fg = "#ffffff", gui = "bold" },
+      color = { fg = mocha.subtext0, gui = "bold" },
     })
 
     -- Add components to right sections
@@ -217,7 +241,8 @@ return {
 
     ins_right({
       function()
-        return "▊"
+        -- return "▊"
+        return ""
       end,
       color = { fg = colors.blue },
       padding = { left = 1 },
