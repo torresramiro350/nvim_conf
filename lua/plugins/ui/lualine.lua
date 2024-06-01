@@ -1,7 +1,7 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	event = "UIEnter",
-	enabled = false,
+	enabled = true,
 	config = function()
 		local lualine = require("lualine")
 
@@ -47,17 +47,32 @@ return {
     -- stylua: ignore
     lualine.setup({
       options = {
-        theme = "auto",
+        -- theme = "auto",
+        theme = "catppuccin",
         component_separators = { left = '', right = '' },
         section_separators = { left = '', right = '' },
         -- section_separators = { left = '', right = '' },
         -- component_separators = { left = '', right = '' },
       },
       sections = {
+
+        lualine_b = { 'branch', {
+          'diff',
+          symbols = { added = '+', modified = '~', removed = '-' },
+        }, {
+          'diagnostics',
+          sections = { 'error', 'warn', 'info', 'hint' },
+        }, {
+          'buffers',
+          max_length = vim.o.columns * 2 / 3, -- Maximum width of buffers component,
+          -- it can also be a function that returns
+          -- the value of `max_length` dynamically.
+        } },
         lualine_c = { 'filename', {
           "macro-recording",
           fmt = show_macro_recording,
         } }
+        -- lualine_x = {'filename'}
       }
     })
 	end,

@@ -2,7 +2,7 @@
 -- nerd fonts
 vim.g.have_nerd_font = true
 -- copilot settings
-vim.g.copilot_no_tab_map = true
+vim.g.copilot_no_tab_map = false
 -- Place all the general Neovim options
 vim.g.gitblame_display_virtual_text = 1
 vim.g.mapleader = " "
@@ -45,7 +45,7 @@ vim.opt.splitright = true
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 vim.o.relativenumber = true
 
 -- Make line numbers default

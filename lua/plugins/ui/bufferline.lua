@@ -2,6 +2,7 @@
 return {
   "akinsho/bufferline.nvim",
   -- load after catppuccin to ensure the correct highlighting
+  enabled = false,
   event = { "BufNewFile", "BufReadPre", "BufReadPost" },
   config = function()
     local nmap = function(mode, keys, func, additional_args)

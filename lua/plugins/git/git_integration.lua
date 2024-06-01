@@ -1,23 +1,25 @@
 -- Git integration plugins placed here
 return {
-	{
-		priority = 1000,
-		"f-person/git-blame.nvim",
-		-- event = "VeryLazy",
-		event = { "BufRead", "BufReadPost" },
-		cond = function()
-			-- enable plugins only within a git repo
-			local current_dir = vim.fn.getcwd()
-			local git_dir = current_dir .. "/.git"
-			return vim.fn.isdirectory(git_dir) == 1
-		end,
-		config = function()
-			local git_blame = require("gitblame")
-			-- require("lualine").setup({
-			-- 	--
-			-- })
-		end,
-	},
+	-- much of the functionality here is provided by the gitsigns plugin
+	-- {
+	-- 	priority = 1000,
+	-- 	"f-person/git-blame.nvim",
+	-- 	-- event = "VeryLazy",
+	-- 	event = { "BufRead", "BufReadPost" },
+	-- 	cond = function()
+	-- 		-- enable plugins only within a git repo
+	-- 		local current_dir = vim.fn.getcwd()
+	-- 		local git_dir = current_dir .. "/.git"
+	-- 		return vim.fn.isdirectory(git_dir) == 1
+	-- 	end,
+	-- 	enabled = false,
+	-- 	config = function()
+	-- 		local git_blame = require("gitblame")
+	-- 		-- require("lualine").setup({
+	-- 		-- 	--
+	-- 		-- })
+	-- 	end,
+	-- },
 	{
 		"tpope/vim-rhubarb",
 		event = { "BufRead", "BufReadPost" },
@@ -55,11 +57,11 @@ return {
 		end,
 		opts = {
 			signs = {
-				-- add = { text = "+" },
-				-- change = { text = "~" },
-				-- delete = { text = "|" },
-				-- topdelete = { text = "‾" },
-				-- changedelete = { text = "~" },
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "|" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
 			},
 			on_attach = function(bufnr)
 				local gitsigns = require("gitsigns")
@@ -69,7 +71,10 @@ return {
 					vim.keymap.set(mode, keys, func, additional_args)
 				end
 
-				-- nmap("n", "<leader>ph", gitsigns.preview_hunk, { buffer = bufnr, desc = "Git [P]review git hunk" })
+				nmap("n", "<leader>td", gitsigns.toggle_deleted, { desc = "[T]oggle deleted lines" })
+				nmap("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
+				nmap("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
+
 				nmap("n", "<leader>hp", gitsigns.preview_hunk, { desc = "git [p]review hunk" })
 				nmap("n", "<leader>hs", gitsigns.stage_hunk, { desc = "git [s]tage hunk" })
 				nmap("n", "<leader>hr", gitsigns.reset_hunk, { desc = "git [r]eset hunk" })
@@ -82,8 +87,6 @@ return {
 					gitsigns.diffthis("@")
 				end, { desc = "git [D]iff against last commit" })
 				-- Toggles
-				nmap("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
-				nmap("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
 
 				-- don't override the built-in and fugitive keymaps
 				local gs = package.loaded.gitsigns
