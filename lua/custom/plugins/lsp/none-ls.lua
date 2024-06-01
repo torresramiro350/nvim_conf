@@ -42,6 +42,6 @@ return {
     })
   end,
   -- vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format file" }),
-  requires = { "nvim-lua/plenary.nvim" },
+  dependencies = { "nvim-lua/plenary.nvim" },
   event = { "BufReadPre", "BufNewFile" },
 }

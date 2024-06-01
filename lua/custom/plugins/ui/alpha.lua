@@ -11,18 +11,28 @@ return {
     local dashboard = require("alpha.themes.theta")
     local dboard_base = require("alpha.themes.dashboard")
 
-    -- dashboard.header.val = {
     dboard_base.section.header.val = {
-      "           ▄ ▄                   ",
-      "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
-      "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
-      "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
-      "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
-      "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
-      "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
-      "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
-      "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+      "                                                     ",
+      "  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
+      "  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
+      "  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
+      "  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
+      "  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
+      "  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ",
+      "                                                     ",
     }
+    -- dboard_base.section.header.val = {
+    --   "           ▄ ▄                   ",
+    --   "       ▄   ▄▄▄     ▄ ▄▄▄ ▄ ▄     ",
+    --   "       █ ▄ █▄█ ▄▄▄ █ █▄█ █ █     ",
+    --   "    ▄▄ █▄█▄▄▄█ █▄█▄█▄▄█▄▄█ █     ",
+    --   "  ▄ █▄▄█ ▄ ▄▄ ▄█ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄  ",
+    --   "  █▄▄▄▄ ▄▄▄ █ ▄ ▄▄▄ ▄ ▄▄▄ ▄ ▄ █ ▄",
+    --   "▄ █ █▄█ █▄█ █ █ █▄█ █ █▄█ ▄▄▄ █ █",
+    --   "█▄█ ▄ █▄▄█▄▄█ █ ▄▄█ █ ▄ █ █▄█▄█ █",
+    --   "    █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█ █▄█▄▄▄█    ",
+    -- }
+
     -- dashboard.buttons.val = {
     dboard_base.section.buttons.val = {
       dboard_base.button("f", "󰈞  Find file", "<cmd>Telescope find_files <CR>"),
@@ -33,7 +43,6 @@ return {
       dboard_base.button("l", "󰒲   Lazy", "<cmd>Lazy<CR>"),
       dboard_base.button("m", "  Mason", "<cmd>Mason<CR>"),
       dboard_base.button("u", "󰂖   Update plugins", "<cmd>Lazy sync <CR>"),
-      -- dboard_base.button("u", "󰂖   Update plugins", "<cmd>lua require('lazy').sync()<CR>"),
       dboard_base.button("q", "󰅚  Quit Neovim", "<cmd>qa<CR>"),
     }
     vim.api.nvim_create_autocmd("User", {
@@ -42,7 +51,6 @@ return {
         local ms = math.floor(stats.startuptime * 100) / 100
         dboard_base.section.footer.val = {
           "󱐌 " .. stats.loaded .. "/" .. stats.count .. " plugins loaded in " .. ms .. " ms",
-          -- "= Lazy-loaded " .. "/" .. stats.count .. " plugins in " .. ms .. " ms"
         }
         pcall(vim.cmd.AlphaRedraw)
       end,

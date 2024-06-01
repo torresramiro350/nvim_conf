@@ -1,9 +1,14 @@
 return {
   "folke/noice.nvim",
-  -- event = "VeryLazy",
+  -- event = "CmdlineEnter",
+  event = "UIEnter",
   -- event = "VimEnter",
-  event = "CmdlineEnter",
+  priority = 1000,
   config = function()
+    local nmap = function(mode, keys, func, additional_args)
+      additional_args = additional_args or {}
+      vim.keymap.set(mode, keys, func, additional_args)
+    end
     local noice = require("noice")
 
     noice.setup({
@@ -16,17 +21,17 @@ return {
         },
       },
     })
-    vim.keymap.set("c", "<S-Enter>", function()
+    nmap("c", "<S-Enter>", function()
       noice.redirective(vim.fn.getcmdline())
     end, { desc = "Redirect cmdline" })
 
-    vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
+    nmap({ "n", "i", "s" }, "<c-f>", function()
       if not require("noice.lsp").scroll(4) then
         return "<c-f>"
       end
     end, { silent = true, expr = true })
 
-    vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
+    nmap({ "n", "i", "s" }, "<c-b>", function()
       if not require("noice.lsp").scroll(-4) then
         return "<c-b>"
       end
