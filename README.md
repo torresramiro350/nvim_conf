@@ -5,6 +5,8 @@
 > First configuration after using other Nvim distros. There's lots of rooms for improvements,
 but this is working for me so far
 
+Taking great inspiration from Kickstart
+
 Structure of the configuration:
 
 ```bash
