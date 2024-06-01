@@ -1,6 +1,13 @@
+local nmap = function(mode, keys, func, additional_args)
+  additional_args = additional_args or {}
+  vim.keymap.set(mode, keys, func, additional_args)
+end
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
-  event = { "BufReadPre", "BufNewFile" },
+  -- event = { "BufReadPre", "BufNewFile" },
+  event = { { "BufNewFile", "BufReadPre", "BufReadPre" } },
+  -- keys = { nmap("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "File list" }) },
   version = "*",
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -8,10 +15,6 @@ return {
     "MunifTanjim/nui.nvim",
   },
   config = function()
-    local nmap = function(mode, keys, func, additional_args)
-      additional_args = additional_args or {}
-      vim.keymap.set(mode, keys, func, additional_args)
-    end
     local neotree = require("neo-tree")
     neotree.setup({
       source_selector = {
