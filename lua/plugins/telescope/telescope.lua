@@ -7,6 +7,14 @@ return {
     dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
   },
   {
+    "crispgm/telescope-heading.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      -- local heading = require("telescope")
+      -- heading.load_extension("heading")
+    end,
+  },
+  {
     "nvim-telescope/telescope.nvim",
     event = { "VimEnter", "UIEnter" },
     config = function()
@@ -17,6 +25,13 @@ return {
         extensions = {
           file_browser = {
             -- theme = "catppuccin",
+          },
+          heading = {
+            treesitter = true,
+            picker_opts = {
+              layout_config = { width = 0.8, preview_width = 0.5 },
+              layout_strategy = "horizontal",
+            },
           },
         },
         defaults = {
@@ -89,6 +104,7 @@ return {
       local tel_bin = require("telescope.builtin")
       local tel = require("telescope")
       local tel_themes = require("telescope.themes")
+      local heading = require("telescope").load_extension("heading")
       -- Enable telescope fzf native, if installed
       pcall(tel.load_extension, "fzf")
 
