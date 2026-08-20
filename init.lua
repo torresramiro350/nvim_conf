@@ -1,11 +1,11 @@
--- NOTE: load in the general options to use with vim
-require("vim_options.essential")
-
+-- load in the general options to use with vim
+require("config.options")
 -- Load lazyvim's configuration
-require("lazyvim.init")
-
-vim.cmd.colorscheme("catppuccin-mocha")
-
--- load all the keymaps to a separate file
+require("config.lazy")
+-- load all general mappings
 require("keymaps.mappings")
-require("groups.init")
+-- load my autocmds
+require("config.autocmds")
+-- load the lsp diagnostics configuration
+require("lsp.lsp")
+-- require("utils.diagnostics")

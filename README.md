@@ -1,23 +1,17 @@
 # Neovim configuration
 
-> First configuration after using other Nvim distros. There's lots of rooms for improvements,
-but this is working for me so far
+<!--toc:start-->
+- [Neovim configuration](#neovim-configuration)
+  - [Configuration overview](#configuration-overview)
+    - [Acknowledgements](#acknowledgements)
+<!--toc:end-->
 
-Taking great inspiration from Kickstart
+## Configuration overview
 
-Structure of the configuration:
+> [!NOTE]
+> First configuration after using other `Neovim` distros. There's lots of rooms
+> for improvements, but this is working for me so far.
 
-```bash
- .
-├──  lua
-│  ├──  groups
-│  ├──  keymaps
-│  ├──  lazyvim
-│  ├──  plugins
-│  └──  vim_options
-├──  init.lua
-├──  lazy-lock.json
-├──  README.md
-└──  sourcery_token.txt
+### Acknowledgements
 
-```
+Taking great inspiration from [Kickstart](https://github.com/nvim-lua/kickstart.nvim)

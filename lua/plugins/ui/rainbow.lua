@@ -1,10 +1,9 @@
 return {
-  "HiPhish/rainbow-delimiters.nvim",
-  config = function()
-    require("rainbow-delimiters.setup").setup({
-      -- call options here
-    })
-  end,
-  -- when starting to edit a new buffer
-  event = { "BufNewFile", "BufReadPost", "BufReadPre" },
+	"HiPhish/rainbow-delimiters.nvim",
+	enabled = true,
+	event = { "BufRead" },
+	opts = {},
+	config = function(_, opts)
+		require("rainbow-delimiters.setup").setup(opts)
+	end,
 }
